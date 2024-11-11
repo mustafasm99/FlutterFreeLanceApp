@@ -4,6 +4,7 @@ final ThemeData mainTheme = ThemeData(
   primaryColorLight: const Color(0xFFE1F1F5),
   primarySwatch: Colors.blue,
   primaryColor: Colors.blue,
+  primaryColorDark: const Color(0xFF3C97AF),
   scaffoldBackgroundColor: Colors.white,
   fontFamily: 'Roboto',
   textTheme: const TextTheme(

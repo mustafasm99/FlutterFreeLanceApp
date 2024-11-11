@@ -30,9 +30,7 @@ class UserTypeContainer extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected
-                ? context.theme.primaryColor
-                : Color(0xFFBFBFBF),
+            color: isSelected ? context.theme.primaryColor : Color(0xFFBFBFBF),
           ),
         ),
         margin: const EdgeInsets.symmetric(
@@ -46,23 +44,25 @@ class UserTypeContainer extends StatelessWidget {
             children: [
               icon,
               const SizedBox(width: 20),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
-                  ),
-                  Text(
-                    description,
-                    style: const TextStyle(color: Colors.black26),
-                  ),
-                ],
-              ),
+                    Text(
+                      description,
+                      style: const TextStyle(color: Colors.black26),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -70,6 +70,7 @@ class UserTypeContainer extends StatelessWidget {
     );
   }
 }
+
 class Slid1 extends StatelessWidget {
   final sliderController _controller = Get.put(sliderController());
 
@@ -91,18 +92,20 @@ class Slid1 extends StatelessWidget {
           const SizedBox(height: 8),
           const Text("How do you plan to use this platform"),
           Obx(() => UserTypeContainer(
-                icon: ProjectIcons.user(color: _controller.selectedOption.value == "Freelance"
-                    ? Theme.of(context).colorScheme.primary
-                    : Colors.black),
+                icon: ProjectIcons.user(
+                    color: _controller.selectedOption.value == "Freelance"
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.black),
                 title: "Freelance",
                 description: "I’m a freelancer ready to work for projects",
                 isSelected: _controller.selectedOption.value == "Freelance",
                 onTap: () => _controller.selectedOption("Freelance"),
               )),
           Obx(() => UserTypeContainer(
-                icon: ProjectIcons.userSearch(color: _controller.selectedOption.value == "Client"
-                    ? Theme.of(context).colorScheme.primary
-                    : Colors.black),
+                icon: ProjectIcons.userSearch(
+                    color: _controller.selectedOption.value == "Client"
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.black),
                 title: "Client",
                 description: "I’m a client searching for talented freelancers",
                 isSelected: _controller.selectedOption.value == "Client",

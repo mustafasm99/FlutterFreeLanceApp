@@ -1,9 +1,16 @@
+import 'package:finailtask/extentions/sizeing.dart';
+import 'package:finailtask/extentions/theme_extentions.dart';
+import 'package:finailtask/pages/inpording/slides/slid3.dart';
+import 'package:finailtask/pages/inpording/slides/slid4.dart';
+import 'package:finailtask/util/button_text.dart';
+import 'package:finailtask/util/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:finailtask/pages/inpording/slides/slid1.dart';
 import 'package:finailtask/pages/inpording/slides/slid2.dart';
 import 'package:finailtask/widgets/full_screen_button.dart';
 import 'package:finailtask/widgets/tabBarContainer.dart';
+import 'package:get/get_utils/src/extensions/context_extensions.dart';
 
 class InpordingView extends StatefulWidget {
   const InpordingView({super.key});
@@ -19,29 +26,37 @@ class __OnpordingPagStateState extends State<InpordingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(20),
         margin: const EdgeInsets.only(top: 20),
         height: double.infinity,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(3, (index) {
+              children: List.generate(4, (index) {
+                double width = context.screenWidth * 0.28;
+                if (index == 1 || index == 2) {
+                  width = (context.screenWidth * 0.28) / 2;
+                }
                 return Tabbarcontainer(
                   active: index == currentSlider,
+                  width: width,
                 );
               }),
             ),
             SizedBox(
-              height: 500,
+              height: 550,
               child: CarouselSlider(
                 items: [
                   Slid1(),
-                  const Slid2(),
+                  Slid2(),
+                  Slid3(),
+                  Slid4(),
                 ],
                 options: CarouselOptions(
                   height: double.infinity,
@@ -56,24 +71,30 @@ class __OnpordingPagStateState extends State<InpordingView> {
                 carouselController: sliderController,
               ),
             ),
-            FullScreenButton(
-              onPressed: () {
-                setState(() {
-                  if (currentSlider < 2) {
-                    currentSlider++;
-                  } else {
-                    currentSlider = 0; // or navigate elsewhere if needed
-                  }
-                  sliderController.animateToPage(currentSlider);
-                });
-              },
-              icon: const Icon(
-                Icons.arrow_forward,
-                color: Colors.white,
-                size: 20,
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: FullScreenButton(
+                  onPressed: () {
+                    setState(() {
+                      if (currentSlider < 3) {
+                        currentSlider++;
+                        print(currentSlider);
+                      } else {
+                        currentSlider = 0; // or navigate elsewhere if needed
+                      }
+                      sliderController.animateToPage(currentSlider);
+                    });
+                  },
+                  icon: currentSlider == 0
+                      ? ProjectIcons.arrowRight(
+                          color: Colors.white,
+                        )
+                      : null,
+                  inputText: getButtonText(currentSlider),
+                  color: context.primaryDark,
+                ),
               ),
-              inputText: "Next",
-              color: Colors.blue[200]!,
             ),
           ],
         ),

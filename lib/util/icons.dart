@@ -104,4 +104,7 @@ class ProjectIcons {
 
   static Widget filterHorizontal({Color color = Colors.black, double size = 24.0}) =>
       icon('1_filter-horizontal.svg', color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
+
+  static Widget clock({Color color = Colors.black, double size = 24.0}) =>
+      icon('clock-01.svg', color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
 }

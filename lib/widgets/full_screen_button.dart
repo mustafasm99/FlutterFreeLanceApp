@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class FullScreenButton extends StatelessWidget {
   final VoidCallback onPressed;
-  final Widget icon;
+  final Widget? icon;
   final String inputText;
   final Color color;
 
   const FullScreenButton({
     super.key,
     required this.onPressed,
-    required this.icon,
+    this.icon,
     required this.inputText,
     required this.color,
   });
@@ -20,7 +20,7 @@ class FullScreenButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(25),
       ),
       backgroundColor: color,
       minimumSize: const Size.fromHeight(70),
@@ -34,7 +34,7 @@ class FullScreenButton extends StatelessWidget {
         style: const TextStyle(color: Colors.white),
         ),
         const SizedBox(width: 10),
-        icon,
+        icon ?? const SizedBox.shrink(),
       ],
       ),
     );

@@ -12,7 +12,7 @@ extension ThemeContext on BuildContext {
 
   // Access secondary color (onActiveColor)
   Color get onActiveColor => Theme.of(this).colorScheme.secondary;
-
+  Color get primaryDark => Theme.of(this).primaryColorDark;
   // Access headline large text style
   TextStyle? get headlineLarge => Theme.of(this).textTheme.headlineLarge;
 
@@ -21,4 +21,10 @@ extension ThemeContext on BuildContext {
 
   // Access headline small text style
   TextStyle? get headlineSmall => Theme.of(this).textTheme.headlineSmall;
+
+  // Font family
+  String get fontFamily => 'Poppins';
+
+  // Font color
+  Color get fontColor => const Color(0xFF999999);
 }
