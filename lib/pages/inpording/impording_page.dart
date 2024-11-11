@@ -1,10 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:finailtask/pages/inpording/slides/slid1.dart';
 import 'package:finailtask/pages/inpording/slides/slid2.dart';
 import 'package:finailtask/widgets/full_screen_button.dart';
 import 'package:finailtask/widgets/tabBarContainer.dart';
-import 'package:flutter/material.dart';
-// import 'package:get/get_navigation/src/routes/default_transitions.dart';
 
 class InpordingView extends StatefulWidget {
   const InpordingView({super.key});
@@ -16,12 +15,6 @@ class InpordingView extends StatefulWidget {
 class __OnpordingPagStateState extends State<InpordingView> {
   int currentSlider = 0;
   CarouselSliderController sliderController = CarouselSliderController();
-  int step = 0;
-  List<Tabbarcontainer>  tabBarsContainers = [
-    const Tabbarcontainer(active: true),
-    const Tabbarcontainer(active: false),
-    const Tabbarcontainer(active: false),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -35,34 +28,22 @@ class __OnpordingPagStateState extends State<InpordingView> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 70,
-              width: double.infinity,
-              child: CarouselSlider(
-                items: tabBarsContainers,
-                options: CarouselOptions(
-                  
-                  height: double.infinity,
-                  viewportFraction: 1,
-                  enableInfiniteScroll: false,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      currentSlider = index;
-                    });
-                  },
-                ),
-                carouselController: sliderController,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(3, (index) {
+                return Tabbarcontainer(
+                  active: index == currentSlider,
+                );
+              }),
             ),
             SizedBox(
               height: 500,
               child: CarouselSlider(
-                items: const [
+                items: [
                   Slid1(),
-                  Slid2(),
+                  const Slid2(),
                 ],
                 options: CarouselOptions(
-                  
                   height: double.infinity,
                   viewportFraction: 1,
                   enableInfiniteScroll: false,
@@ -76,17 +57,24 @@ class __OnpordingPagStateState extends State<InpordingView> {
               ),
             ),
             FullScreenButton(
-              onPressed: (){
-                sliderController.animateToPage(2);
-              }, 
+              onPressed: () {
+                setState(() {
+                  if (currentSlider < 2) {
+                    currentSlider++;
+                  } else {
+                    currentSlider = 0; // or navigate elsewhere if needed
+                  }
+                  sliderController.animateToPage(currentSlider);
+                });
+              },
               icon: const Icon(
-              Icons.arrow_forward,
-              color: Colors.white,
-              size: 20,
-              ), 
-              inputText: "Next", 
-              color: Colors.blue[200]!
-            )
+                Icons.arrow_forward,
+                color: Colors.white,
+                size: 20,
+              ),
+              inputText: "Next",
+              color: Colors.blue[200]!,
+            ),
           ],
         ),
       ),
