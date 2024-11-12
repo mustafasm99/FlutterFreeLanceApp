@@ -1,4 +1,3 @@
-import 'package:finailtask/extentions/sizeing.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/slides/slid3.dart';
 import 'package:finailtask/pages/inpording/slides/slid4.dart';
