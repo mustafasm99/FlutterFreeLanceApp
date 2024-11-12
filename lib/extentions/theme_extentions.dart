@@ -27,4 +27,7 @@ extension ThemeContext on BuildContext {
 
   // Font color
   Color get fontColor => const Color(0xFF999999);
+  Color get unActive => const Color(0xFFEBEBEB);
+  Color get activeNavIcon => const Color(0xFF1c4752);
+  Color get inActiveNavIcon => const Color(0xFFf8fbfc);
 }

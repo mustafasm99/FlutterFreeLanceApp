@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: mainTheme,
       getPages: AppPages.pages,
-      initialRoute: AppRouter.home,
+      initialRoute: AppRouter.impording,
       home:const InpordingView(),
     );
   }

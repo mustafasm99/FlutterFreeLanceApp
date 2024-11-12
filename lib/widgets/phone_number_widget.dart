@@ -1,10 +1,12 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PhoneNumberWidget extends StatelessWidget {
   final TextEditingController controller;
-  const PhoneNumberWidget({super.key , required this.controller});
+  final void Function(String)? onChanged;
+  const PhoneNumberWidget({super.key , required this.controller , this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +38,13 @@ class PhoneNumberWidget extends StatelessWidget {
             child: Container(
               height: 50,
               margin: const EdgeInsets.symmetric(horizontal: 5),
-              child: TextFormField(
-                controller:controller,
+                child: TextFormField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                onChanged: onChanged,
+                controller: controller,
                 style: TextStyle(
                   color: context.fontColor,
                   fontFamily: context.fontFamily,
@@ -45,27 +52,27 @@ class PhoneNumberWidget extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: 'Phone Number',
                   hintStyle: TextStyle(
-                    color: context.fontColor,
-                    fontFamily: context.fontFamily,
+                  color: context.fontColor,
+                  fontFamily: context.fontFamily,
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: context.fontColor,
-                    ),
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: context.fontColor,
+                  ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: context.fontColor,
-                    ),
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: context.fontColor,
+                  ),
                   ),
                 ),
+                ),
               ),
+              ),
+            ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

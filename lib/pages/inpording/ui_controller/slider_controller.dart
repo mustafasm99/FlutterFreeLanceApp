@@ -5,10 +5,12 @@ import 'package:flutter/widgets.dart';
 
 
 class sliderController extends GetxController {
-  var currentPage = 0.obs;
-  var isLastPage = false.obs;
-  var isUserTypeSelected = false.obs;
-  var selectedOption = ''.obs;
+  RxInt currentPage = 0.obs;
+  RxInt currentSlider = 0.obs;
+  RxBool isLastPage = false.obs;
+  RxBool isUserTypeSelected = false.obs;
+  RxString selectedOption = ''.obs;
+  RxBool isSliderActive = false.obs;
   Widget button = FullScreenButton(
     onPressed: (){},
     icon: null,

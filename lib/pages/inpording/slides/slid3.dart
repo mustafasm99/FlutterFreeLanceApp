@@ -1,15 +1,18 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/ui_controller/slide2_controller.dart';
+import 'package:finailtask/pages/inpording/ui_controller/slider_controller.dart';
 import 'package:finailtask/util/icons.dart';
 import 'package:finailtask/widgets/otp_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:timer_count_down/timer_controller.dart';
 
 class Slid3 extends StatelessWidget {
   Slid3({super.key});
   Slide2Controller controller = Get.put(Slide2Controller());
-
+  var SliderController = Get.put(sliderController());
+  CountdownController countdownController = CountdownController();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -41,6 +44,13 @@ class Slid3 extends StatelessWidget {
             const SizedBox(height: 20),
             OtpInput(
               controller: controller.OtpController,
+              onChanged: (value) {
+                if (value.length == 6) {
+                  SliderController.isSliderActive(true);
+                } else {
+                  SliderController.isSliderActive(false);
+                }
+              },
             ),
             const SizedBox(height: 30),
             Center(
@@ -53,16 +63,23 @@ class Slid3 extends StatelessWidget {
                     width: 5,
                   ),
                   Countdown(
-                    seconds: 60,
-                    build: (BuildContext context, double time) => Text(
-                      "00:${time.toInt()}",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: context.primaryColor,
-                        fontFamily: context.fontFamily,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    controller: countdownController, // To Control the Countdown
+                    seconds: 10,
+                    onFinished: () {
+                      countdownController.isCompleted = true;
+                    },
+                    build: (BuildContext context, double time) {
+                      countdownController.start();
+                      return Text(
+                        "00:${time.toInt()}",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: context.primaryColor,
+                          fontFamily: context.fontFamily,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -81,7 +98,13 @@ class Slid3 extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (countdownController.isCompleted == true)
+                          {
+                            countdownController.isCompleted = false;
+                            countdownController.restart();
+                          }
+                    },
                     child: Text(
                       "Resend",
                       style: TextStyle(

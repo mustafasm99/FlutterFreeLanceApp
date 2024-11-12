@@ -5,9 +5,11 @@ import 'package:flutter/services.dart';
 
 class OtpInput extends StatelessWidget {
   final TextEditingController controller;
-  const OtpInput({
+  void Function(String value) onChanged;
+  OtpInput({
     super.key,
     required this.controller,
+    required this.onChanged,
   });
 
   @override
@@ -29,6 +31,7 @@ class OtpInput extends StatelessWidget {
       controller: controller,
       animationCurve: Curves.easeInOut,
       keyboardType: TextInputType.number,
+      onChanged:onChanged,
       length: 6,
       autofocus: true,
       defaultPinTheme: dfaulttPinPutTheme,

@@ -6,11 +6,12 @@ import 'package:get/get.dart';
 
 class NormalInput extends StatelessWidget {
   final TextEditingController controller;
-  const NormalInput({super.key, required this.controller});
-
+  void Function(String)? onChanged = (value) {};
+  NormalInput({super.key, required this.controller , this.onChanged});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       controller: controller,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
@@ -32,12 +33,15 @@ class NormalInput extends StatelessWidget {
 
 class PasswordInputField extends StatelessWidget {
   TextEditingController controller = TextEditingController();
-  PasswordInputField({super.key, required this.controller});
+  void Function(String)? onChanged = (value) {};
+
+  PasswordInputField({super.key, required this.controller , this.onChanged});
   var widgetController = Get.put(PasswordController());
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => TextFormField(
+        onChanged: onChanged,
         controller: controller,
         obscureText: widgetController.show.value,
         decoration: InputDecoration(

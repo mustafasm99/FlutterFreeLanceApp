@@ -1,10 +1,13 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/ui_controller/slide2_controller.dart';
+import 'package:finailtask/pages/inpording/ui_controller/slider_controller.dart';
+import 'package:finailtask/util/phone_number_vaildation.dart';
 import 'package:finailtask/widgets/phone_number_widget.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 class Slid2 extends StatelessWidget {
-  Slide2Controller controller = Get.put(Slide2Controller());
+  var controller = Get.put(Slide2Controller());
+  var SliderController = Get.put(sliderController());
   Slid2({super.key});
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,16 @@ class Slid2 extends StatelessWidget {
             ),
             PhoneNumberWidget(
               controller: controller.PhoneNumberController,
+              onChanged:(value){
+                  if(PhoneNumberViolation(value)){
+                    controller.PhoneNumberController.text = value;
+                    SliderController.isSliderActive(true);
+                    SliderController.update();
+                  }else{
+                    SliderController.isSliderActive(false);
+                    SliderController.update();
+                  }
+              },
             ),
           ],
         ),

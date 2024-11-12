@@ -91,26 +91,36 @@ class Slid1 extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text("How do you plan to use this platform"),
-          Obx(() => UserTypeContainer(
-                icon: ProjectIcons.user(
-                    color: _controller.selectedOption.value == "Freelance"
-                        ? Theme.of(context).colorScheme.primary
-                        : Colors.black),
-                title: "Freelance",
-                description: "I’m a freelancer ready to work for projects",
-                isSelected: _controller.selectedOption.value == "Freelance",
-                onTap: () => _controller.selectedOption("Freelance"),
-              )),
-          Obx(() => UserTypeContainer(
-                icon: ProjectIcons.userSearch(
-                    color: _controller.selectedOption.value == "Client"
-                        ? Theme.of(context).colorScheme.primary
-                        : Colors.black),
-                title: "Client",
-                description: "I’m a client searching for talented freelancers",
-                isSelected: _controller.selectedOption.value == "Client",
-                onTap: () => _controller.selectedOption("Client"),
-              )),
+          Obx(
+            () => UserTypeContainer(
+              icon: ProjectIcons.user(
+                  color: _controller.selectedOption.value == "Freelance"
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.black),
+              title: "Freelance",
+              description: "I’m a freelancer ready to work for projects",
+              isSelected: _controller.selectedOption.value == "Freelance",
+              onTap: (){
+                _controller.selectedOption("Freelance");
+                _controller.isSliderActive(true);
+              },
+            ),
+          ),
+          Obx(
+            () => UserTypeContainer(
+              icon: ProjectIcons.userSearch(
+                  color: _controller.selectedOption.value == "Client"
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.black),
+              title: "Client",
+              description: "I’m a client searching for talented freelancers",
+              isSelected: _controller.selectedOption.value == "Client",
+              onTap: (){
+                _controller.selectedOption("Client");
+                _controller.isSliderActive(true);
+              },
+            ),
+          ),
         ],
       ),
     );

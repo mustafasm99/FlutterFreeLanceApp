@@ -16,5 +16,28 @@ class FromController extends GetxController {
     password.value = data['password']!;
   }
 
+  Map<String, String> get getData => {
+    'name': name.value,
+    'email': email.value,
+    'password': password.value,
+  };
 
+
+  bool is_valid(){
+    RegExp passwordRegExp = RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$');
+    RegExp emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    if (!passwordRegExp.hasMatch(password.value)) {
+      return false;
+    }
+    if (!emailRegExp.hasMatch(email.value)) {
+      return false;
+    }
+    if (name.value.length < 4 || name.value.length > 50) {
+      return false;
+    }
+    if(name.value.isEmpty || email.value.isEmpty || password.value.isEmpty){
+      return false;
+    }
+    return true;
+  }
 }

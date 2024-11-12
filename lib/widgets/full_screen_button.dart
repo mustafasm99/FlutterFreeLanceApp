@@ -1,3 +1,5 @@
+import 'package:finailtask/extentions/theme_extentions.dart';
+import 'package:finailtask/pages/inpording/impording_page.dart';
 import 'package:flutter/material.dart';
 
 class FullScreenButton extends StatelessWidget {
@@ -5,6 +7,7 @@ class FullScreenButton extends StatelessWidget {
   final Widget? icon;
   final String inputText;
   final Color color;
+  final bool isActive;
 
   const FullScreenButton({
     super.key,
@@ -12,6 +15,7 @@ class FullScreenButton extends StatelessWidget {
     this.icon,
     required this.inputText,
     required this.color,
+    this.isActive = false,
   });
 
   @override
@@ -22,7 +26,7 @@ class FullScreenButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
       ),
-      backgroundColor: color,
+      backgroundColor: isActive ? color : context.unActive,
       minimumSize: const Size.fromHeight(70),
       ),
       onPressed: onPressed,
@@ -31,7 +35,9 @@ class FullScreenButton extends StatelessWidget {
       children: [
         Text(
         inputText,
-        style: const TextStyle(color: Colors.white),
+        style:TextStyle(
+          color: isActive ? Colors.white : context.fontColor,
+        ),
         ),
         const SizedBox(width: 10),
         icon ?? const SizedBox.shrink(),

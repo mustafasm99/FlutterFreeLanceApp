@@ -1,14 +1,15 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/slides/base_slid.dart';
 import 'package:finailtask/pages/inpording/ui_controller/form_controller.dart';
+import 'package:finailtask/pages/inpording/ui_controller/slider_controller.dart';
 import 'package:finailtask/widgets/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Slid4 extends StatelessWidget {
   Slid4({super.key});
-  GetxController controller = Get.put(FromController());
-  var InputFormController = FromController();
+  var controller = Get.put(FromController());
+  var SliderController = Get.put(sliderController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,16 @@ class Slid4 extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          NormalInput(controller: InputFormController.nameInput),
+          NormalInput(
+            controller: controller.nameInput,
+            onChanged: (value) {
+              controller.name.value = value;
+              if (controller.is_valid()) {
+                SliderController.isSliderActive(true);
+                SliderController.update();
+              }
+            },
+          ),
           const SizedBox(height: 20),
           const Text(
             "Email",
@@ -50,7 +60,16 @@ class Slid4 extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          NormalInput(controller: InputFormController.emailInput),
+          NormalInput(
+            controller: controller.emailInput,
+            onChanged: (value) {
+              controller.email.value = value;
+              if (controller.is_valid()) {
+                SliderController.isSliderActive(true);
+                SliderController.update();
+              }
+            },
+          ),
           const SizedBox(height: 20),
           const Text(
             "Password",
@@ -59,7 +78,16 @@ class Slid4 extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          PasswordInputField(controller: InputFormController.passwordInput),
+          PasswordInputField(
+            controller: controller.passwordInput,
+            onChanged: (value) {
+              controller.password.value = value;
+              if (controller.is_valid()) {
+                SliderController.isSliderActive(true);
+                SliderController.update();
+              }
+            },
+          ),
         ],
       ),
     );
