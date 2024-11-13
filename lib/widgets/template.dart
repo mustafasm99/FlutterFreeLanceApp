@@ -5,23 +5,20 @@ import 'package:flutter/material.dart';
 
 class Template extends StatelessWidget {
   final Widget child;
-  final String imageUrl,name,userType;
-  Template(
+  final Widget? freeSpace;
+
+  const Template(
     {
       super.key ,
       required this.child,
-      required this.imageUrl,
-      required this.name,
-      required this.userType
+      this.freeSpace,
     }
   );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:TopNavigationBar(
-        imageUrl: imageUrl,
-        name: name,
-        userType: userType,
+        freeSpace: freeSpace,
       ),
       body: child,
       bottomNavigationBar: AppBottomNavigationBar(),

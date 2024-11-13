@@ -99,7 +99,7 @@ class ProjectIcons {
   static Widget plusSign({Color color = Colors.black, double size = 24.0}) =>
       icon('14_plus-sign.svg', color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
 
-  static Widget search({Color color = Colors.black, double size = 24.0}) =>
+  static Widget search({Color color = Colors.black, double size = 15}) =>
       icon('15_search-01.svg', color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
 
   static Widget filterHorizontal({Color color = Colors.black, double size = 24.0}) =>

@@ -14,7 +14,7 @@ class AppBottomNavigationBar extends StatelessWidget {
     switch (index) {
       case 0:
         controller.currentPage.value = 0;
-        Get.toNamed('/home');
+        Get.toNamed('/feed');
         break;
       case 1:
         controller.currentPage.value = 1;

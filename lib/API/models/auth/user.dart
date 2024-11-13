@@ -1,26 +1,30 @@
 class Users{
-  final String id;
-  final String name;
-  final String email;
-  final String password;
-  final String phone;
-  final String address;
-  final String role;
-  final String status;
-  final String createdAt;
-  final String updatedAt;
+  final String? id;
+  final String? name;
+  final String? email;
+  final String? password;
+  final String? phone;
+  final String? address;
+  final String? role;
+  final String? status;
+  final String? createdAt;
+  final String? updatedAt;
+  final String? imageUrl;
+  final String? userType;
 
   Users({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.password,
-    required this.phone,
-    required this.address,
-    required this.role,
-    required this.status,
-    required this.createdAt,
-    required this.updatedAt
+    this.id,
+    this.name,
+    this.email,
+    this.password,
+    this.phone,
+    this.address,
+    this.role,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.imageUrl,
+    this.userType
   });
 
   factory Users.fromJson(Map<String, dynamic> json){
@@ -34,7 +38,9 @@ class Users{
       role: json['role'],
       status: json['status'],
       createdAt: json['created_at'],
-      updatedAt: json['updated_at']
+      updatedAt: json['updated_at'],
+      imageUrl: json['imageUrl'],
+      userType: json['userType'],
     );
   }
 
@@ -48,6 +54,8 @@ class Users{
     'role': role,
     'status': status,
     'created_at': createdAt,
-    'updated_at': updatedAt
+    'updated_at': updatedAt,
+    'imageUrl': imageUrl,
+    'userType': userType,
   };
 }

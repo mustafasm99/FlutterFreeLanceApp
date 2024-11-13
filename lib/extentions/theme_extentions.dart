@@ -30,4 +30,5 @@ extension ThemeContext on BuildContext {
   Color get unActive => const Color(0xFFEBEBEB);
   Color get activeNavIcon => const Color(0xFF1c4752);
   Color get inActiveNavIcon => const Color(0xFFf8fbfc);
+  Color get hoverColor => const Color(0xFFecf6f9);
 }
