@@ -8,6 +8,7 @@ class FullScreenButton extends StatelessWidget {
   final String inputText;
   final Color color;
   final bool isActive;
+  
 
   const FullScreenButton({
     super.key,

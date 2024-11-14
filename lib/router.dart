@@ -1,3 +1,4 @@
+import "package:finailtask/pages/create_project/create_project.dart";
 import "package:finailtask/pages/home/home.dart";
 import "package:finailtask/pages/inpording/impording_page.dart";
 import "package:finailtask/pages/profile/profileView.dart";
@@ -14,18 +15,15 @@ class AppRouter {
   static const String feed = "/feed";
   static const String profile = "/profile";
   static const String settings = "/settings";
-
+  static const String createProject = "/create-project";
 }
 
 class AppPages {
   static final pages = [
     GetPage(name: AppRouter.home, page: () => const HomeView() , transition: Transition.fadeIn),
-    // GetPage(name: Router.dashboard, page: () => DashboardView()),
     GetPage(name: AppRouter.impording, page: () => const InpordingView() , transition: Transition.fadeIn),
-    // GetPage(name: AppRouter.otp, page: () => OtpView()),
-    // GetPage(name: AppRouter.login, page: () => LoginView()),
-    // GetPage(name: AppRouter.register, page: () => RegisterView()),
     GetPage(name: AppRouter.profile, page: () => const ProfileView()),
     GetPage(name: AppRouter.settings, page: () => const SettingsView()),
+    GetPage(name: AppRouter.createProject, page: () => CreateProject()),
   ];
 }

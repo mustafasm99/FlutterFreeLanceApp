@@ -107,4 +107,10 @@ class ProjectIcons {
 
   static Widget clock({Color color = Colors.black, double size = 24.0}) =>
       icon('clock-01.svg', color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
+  
+  static Widget documents({Color color = Colors.black, double size = 24.0}) =>
+      icon('documents.svg', color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
+  
+  static Widget media ({Color color = Colors.black, double size = 24.0}) =>
+      icon('media.svg', color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
 }

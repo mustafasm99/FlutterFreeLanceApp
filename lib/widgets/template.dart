@@ -2,16 +2,21 @@ import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/navigation/bottom_nav.dart';
 import 'package:finailtask/navigation/top_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Template extends StatelessWidget {
   final Widget child;
   final Widget? freeSpace;
-
-  const Template(
+  final Widget? bottomNavigationBar;
+  bool? havFloatingButton = true;
+  
+  Template(
     {
       super.key ,
       required this.child,
       this.freeSpace,
+      this.bottomNavigationBar,
+      this.havFloatingButton = true,
     }
   );
   @override
@@ -21,18 +26,20 @@ class Template extends StatelessWidget {
         freeSpace: freeSpace,
       ),
       body: child,
-      bottomNavigationBar: AppBottomNavigationBar(),
-      floatingActionButton: GestureDetector(
-        onTap: () {},
+      bottomNavigationBar: bottomNavigationBar ?? AppBottomNavigationBar(),
+      floatingActionButton:(havFloatingButton ?? false) ? GestureDetector(
+        onTap: () {
+          Get.offNamed('/create-project');
+        },
         child: Container(
           height: 60,
           width: 60,
           decoration:const  BoxDecoration(
-            color:  Color.fromARGB(255, 82, 146, 175),
+            color: Color.fromRGBO(82, 146, 175, 1),
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: Color.fromRGBO(255, 255, 255, 1),
               spreadRadius: 1,
               blurRadius: 8,
               offset: Offset(0, 3), // changes position of shadow
@@ -45,7 +52,7 @@ class Template extends StatelessWidget {
             size: 30,
           ),
         ),
-      ),
+      ):null ,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

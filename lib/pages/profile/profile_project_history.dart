@@ -2,7 +2,7 @@ import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/profile/project_item.dart';
 import 'package:finailtask/util/icons.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 class ProfileProjectHistory extends StatelessWidget {
   const ProfileProjectHistory({super.key});
 
@@ -35,7 +35,9 @@ class ProfileProjectHistory extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.offNamed('/create-project');
+                    },
                     icon: ProjectIcons.plusSign(
                       color: Colors.black,
                       size: 24,
