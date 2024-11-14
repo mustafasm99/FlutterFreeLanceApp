@@ -46,62 +46,134 @@ class AppBottomNavigationBar extends StatelessWidget {
                 color: context.primaryColor,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: context.screenWidth * 0.35,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () => _onItemTapped(0),
-                        icon: ProjectIcons.home(
-                          color: controller.currentPage.value == 0
-                              ? context.activeNavIcon
-                              : Colors.white,
+            Container(
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: context.screenWidth * 0.35,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () => _onItemTapped(0),
+                              icon: ProjectIcons.home(
+                                color: controller.currentPage.value == 0
+                                    ? context.activeNavIcon
+                                    : Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                            Text(
+                              "Home",
+                              style: TextStyle(
+                                  color: controller.currentPage.value == 0
+                                      ? context.activeNavIcon
+                                      : Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () => _onItemTapped(1),
-                        icon: ProjectIcons.dashboardSquareEdit(
-                          color: controller.currentPage.value == 1
-                              ? context.activeNavIcon
-                              : Colors.white,
+                        const SizedBox(
+                          width: 10,
                         ),
-                      ),
-                    ],
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () => _onItemTapped(1),
+                              icon: ProjectIcons.dashboardSquareEdit(
+                                color: controller.currentPage.value == 1
+                                    ? context.activeNavIcon
+                                    : Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                            Text(
+                              "Dashboard",
+                              style: TextStyle(
+                                  color: controller.currentPage.value == 1
+                                      ? context.activeNavIcon
+                                      : Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: context.screenWidth * 0.35,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () => _onItemTapped(2),
-                        icon: ProjectIcons.user(
-                          color: controller.currentPage.value == 2
-                              ? context.activeNavIcon
-                              : Colors.white,
-                        ),
+                  SizedBox(
+                    width: context.screenWidth * 0.35,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () => _onItemTapped(2),
+                                icon: ProjectIcons.userCircle(
+                                  color: controller.currentPage.value == 2
+                                      ? context.activeNavIcon
+                                      : Colors.white,
+                                  size: 30,
+                                ),
+                              ),
+                              Text(
+                                "Profile",
+                                style: TextStyle(
+                                    color: controller.currentPage.value == 2
+                                        ? context.activeNavIcon
+                                        : Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () => _onItemTapped(3),
+                                icon: ProjectIcons.settings(
+                                  color: controller.currentPage.value == 3
+                                      ? context.activeNavIcon
+                                      : Colors.white,
+                                  size: 30,
+                                ),
+                              ),
+                              Text(
+                                "Settings",
+                                style: TextStyle(
+                                    color: controller.currentPage.value == 3
+                                        ? context.activeNavIcon
+                                        : Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          )
+                        ],
                       ),
-                      IconButton(
-                        onPressed: () => _onItemTapped(3),
-                        icon: ProjectIcons.settings(
-                          color: controller.currentPage.value == 3
-                              ? context.activeNavIcon
-                              : Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            )
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         );
       }),
@@ -127,7 +199,7 @@ class BottomNavigationBarPinter extends CustomPainter {
       radius: const Radius.circular(35.0),
       clockwise: false,
     );
-    path.quadraticBezierTo(size.width * 0.6, 0, size.width*0.65 , 0);
+    path.quadraticBezierTo(size.width * 0.6, 0, size.width * 0.65, 0);
     path.quadraticBezierTo(size.width * 0.80, 0, size.width, 0);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
