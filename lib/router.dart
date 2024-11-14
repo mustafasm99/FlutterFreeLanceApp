@@ -1,5 +1,6 @@
 import "package:finailtask/pages/home/home.dart";
 import "package:finailtask/pages/inpording/impording_page.dart";
+import "package:finailtask/pages/profile/profileView.dart";
 import "package:finailtask/pages/settings/settings_view.dart";
 import "package:get/get.dart";
 
@@ -21,10 +22,10 @@ class AppPages {
     GetPage(name: AppRouter.home, page: () => const HomeView() , transition: Transition.fadeIn),
     // GetPage(name: Router.dashboard, page: () => DashboardView()),
     GetPage(name: AppRouter.impording, page: () => const InpordingView() , transition: Transition.fadeIn),
-    // GetPage(name: Router.otp, page: () => OtpView()),
-    // GetPage(name: Router.login, page: () => LoginView()),
-    // GetPage(name: Router.register, page: () => RegisterView()),
-    // GetPage(name: Router.profile, page: () => ProfileView()),
+    // GetPage(name: AppRouter.otp, page: () => OtpView()),
+    // GetPage(name: AppRouter.login, page: () => LoginView()),
+    // GetPage(name: AppRouter.register, page: () => RegisterView()),
+    GetPage(name: AppRouter.profile, page: () => const ProfileView()),
     GetPage(name: AppRouter.settings, page: () => const SettingsView()),
   ];
 }

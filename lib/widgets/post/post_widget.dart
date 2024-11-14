@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finailtask/API/models/posts/post_user.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/main.dart';
+import 'package:finailtask/util/icons.dart';
 import 'package:finailtask/widgets/post/status.dart';
 import 'package:finailtask/widgets/post/post_controller.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class PostWidget extends StatelessWidget {
     PostController controller = Get.put<PostController>(PostController());
     return Container(
       width: context.width * 0.9,
-      height: controller.expanded.value ? double.maxFinite : 470,
+      height: controller.expanded.value ? double.maxFinite : 510,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
@@ -43,7 +44,7 @@ class PostWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(
         horizontal: 15,
         vertical: 10,
-        ),
+      ),
       padding: const EdgeInsets.all(12),
       child: SingleChildScrollView(
         child: Column(
@@ -136,7 +137,8 @@ class PostWidget extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          controller.expanded.value = !controller.expanded.value;
+                          controller.expanded.value =
+                              !controller.expanded.value;
                         },
                         child: Text(
                           controller.expanded.value ? 'Show less' : 'Show more',
@@ -178,9 +180,40 @@ class PostWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   )
                 : const SizedBox(height: 2),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {},
+                    icon: ProjectIcons.favorite(color: Colors.black, size: 30)),
+                const Text(
+                  "like",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black45,
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+                const SizedBox(width: 10),
+                IconButton(
+                  onPressed: () {},
+                  icon: ProjectIcons.message(color: Colors.black, size: 30),
+                ),
+                const Text(
+                  "comment",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black45,
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
