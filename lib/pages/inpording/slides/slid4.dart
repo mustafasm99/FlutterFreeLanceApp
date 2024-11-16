@@ -19,7 +19,7 @@ class Slid4 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Enter Your Phone Information",
+            "Enter Your Information",
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.w900,

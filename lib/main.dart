@@ -4,6 +4,8 @@ import 'package:finailtask/router.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:finailtask/themes/mainTheme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 void main() {
   Get.put(UserController());
@@ -15,12 +17,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: mainTheme,
-      getPages: AppPages.pages,
-      initialRoute: AppRouter.impording,
-      home:const InpordingView(),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_ , child) {
+        return GetMaterialApp(
+          title: 'Flutter Demo',
+          theme: mainTheme,
+          initialRoute: '/',
+          getPages: AppPages.pages,
+          home: const InpordingView(),
+        );
+      },
     );
   }
 }

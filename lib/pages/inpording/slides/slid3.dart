@@ -11,7 +11,7 @@ import 'package:timer_count_down/timer_controller.dart';
 class Slid3 extends StatelessWidget {
   Slid3({super.key});
   Slide2Controller controller = Get.put(Slide2Controller());
-  var SliderController = Get.put(sliderController());
+  sliderController SliderController = Get.find();
   CountdownController countdownController = CountdownController();
   @override
   Widget build(BuildContext context) {
@@ -67,6 +67,9 @@ class Slid3 extends StatelessWidget {
                     seconds: 10,
                     onFinished: () {
                       countdownController.isCompleted = true;
+                      countdownController.pause();
+                      SliderController.counterFinished(true);
+
                     },
                     build: (BuildContext context, double time) {
                       countdownController.start();
@@ -99,20 +102,23 @@ class Slid3 extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      if (countdownController.isCompleted == true)
-                          {
-                            countdownController.isCompleted = false;
-                            countdownController.restart();
-                          }
+                      if (countdownController.isCompleted == true) {
+                        countdownController.isCompleted = false;
+                        countdownController.restart();
+                      }
                     },
-                    child: Text(
-                      "Resend",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: context.primaryColor,
-                        fontFamily: context.fontFamily,
-                      ),
-                    ),
+                    child: Obx(() {
+                      return Text(
+                        "Resend",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: SliderController.counterFinished.value
+                              ? context.primaryColor
+                              : context.fontColor,
+                          fontFamily: context.fontFamily,
+                        ),
+                      );
+                    }),
                   ),
                 ],
               ),

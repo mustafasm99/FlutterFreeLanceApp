@@ -11,6 +11,7 @@ class sliderController extends GetxController {
   RxBool isUserTypeSelected = false.obs;
   RxString selectedOption = ''.obs;
   RxBool isSliderActive = false.obs;
+  RxBool counterFinished = false.obs;
   Widget button = FullScreenButton(
     onPressed: (){},
     icon: null,

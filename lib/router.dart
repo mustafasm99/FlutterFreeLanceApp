@@ -1,4 +1,5 @@
 import "package:finailtask/pages/create_project/create_project.dart";
+import "package:finailtask/pages/dashbord/dashboard_view.dart";
 import "package:finailtask/pages/home/home.dart";
 import "package:finailtask/pages/inpording/impording_page.dart";
 import "package:finailtask/pages/profile/profileView.dart";
@@ -25,5 +26,6 @@ class AppPages {
     GetPage(name: AppRouter.profile, page: () => const ProfileView()),
     GetPage(name: AppRouter.settings, page: () => const SettingsView()),
     GetPage(name: AppRouter.createProject, page: () => CreateProject()),
+    GetPage(name: AppRouter.dashboard, page:()=> DashboardView())
   ];
 }
