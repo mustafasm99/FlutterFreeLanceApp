@@ -1,5 +1,7 @@
-import 'package:finailtask/pages/dashbord/search_section.dart';
-import 'package:finailtask/pages/dashbord/tab_bar_dashboard.dart';
+import 'package:finailtask/pages/dashbord/card_slider.dart';
+import 'package:finailtask/pages/dashbord/project_tab_bar/project_tab_bar.dart';
+import 'package:finailtask/pages/dashbord/task_charts.dart';
+import 'package:finailtask/widgets/page_title_widget.dart';
 import 'package:finailtask/widgets/template.dart';
 import 'package:flutter/material.dart';
 
@@ -8,17 +10,24 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Template(child: 
-      Center(
+    return Template(
+      freeSpace: PageTitle(title: "Dashboard"),
+      child: 
+      Container(
+        margin: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.all(0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const DashboardSearchSection(),
-            TabBarDashboard(),
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 10 , left: 10 , right: 10),
+              padding: const EdgeInsets.all(0),
+              child:const DashboardCardSlider(),
+            ),
+            const DashboardTaskCharts(),
+            const ProjectTabBar()
           ],
         ),
-      ),
+      )
     );
   }
 }

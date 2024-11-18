@@ -11,6 +11,7 @@ class Users{
   final String? updatedAt;
   final String? imageUrl;
   final String? userType;
+  final String? workTitle;
 
   Users({
     this.id,
@@ -24,7 +25,8 @@ class Users{
     this.createdAt,
     this.updatedAt,
     this.imageUrl,
-    this.userType
+    this.userType,
+    this.workTitle,
   });
 
   factory Users.fromJson(Map<String, dynamic> json){

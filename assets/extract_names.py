@@ -19,8 +19,6 @@ with open(__file__, 'a') as file:
           file.write(f'assets/icons/{name}\n')
      file.write('"""\n')
 
-
-
 """
 assets/icons/01_arrow-right-01.svg
 assets/icons/01_home-09.svg
@@ -54,4 +52,8 @@ assets/icons/13_delete-02.svg
 assets/icons/14_plus-sign.svg
 assets/icons/15_search-01.svg
 assets/icons/1_filter-horizontal.svg
+assets/icons/clock-01.svg
+assets/icons/documents.svg
+assets/icons/media.svg
+assets/icons/sin_wave.svg
 """
