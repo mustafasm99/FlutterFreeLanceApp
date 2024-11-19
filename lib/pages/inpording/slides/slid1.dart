@@ -1,3 +1,4 @@
+import 'package:finailtask/API/controllers/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:finailtask/util/icons.dart';
@@ -73,7 +74,7 @@ class UserTypeContainer extends StatelessWidget {
 
 class Slid1 extends StatelessWidget {
   final sliderController _controller = Get.put(sliderController());
-
+  RegistrationController registrationController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -103,6 +104,7 @@ class Slid1 extends StatelessWidget {
               onTap: (){
                 _controller.selectedOption("Freelance");
                 _controller.isSliderActive(true);
+                registrationController.userType.value = "FREELANCER";
               },
             ),
           ),
@@ -118,6 +120,7 @@ class Slid1 extends StatelessWidget {
               onTap: (){
                 _controller.selectedOption("Client");
                 _controller.isSliderActive(true);
+                registrationController.userType.value = "CLIENT";
               },
             ),
           ),

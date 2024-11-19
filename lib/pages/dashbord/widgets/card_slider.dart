@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:finailtask/pages/dashbord/slider_item.dart';
+import 'package:finailtask/pages/dashbord/widgets/slider_item.dart';
 import 'package:flutter/material.dart';
 
 class DashboardCardSlider extends StatelessWidget {

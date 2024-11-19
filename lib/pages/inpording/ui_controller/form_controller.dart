@@ -9,7 +9,7 @@ class FromController extends GetxController {
   final TextEditingController nameInput = TextEditingController();
   final TextEditingController emailInput = TextEditingController();
   final TextEditingController passwordInput = TextEditingController();
-
+  var formKey = GlobalKey<FormState>();
   void setData(Map<String ,String> data){
     name.value = data['name']!;
     email.value = data['email']!;
@@ -39,5 +39,10 @@ class FromController extends GetxController {
       return false;
     }
     return true;
+  }
+
+  bool isValidPassword(String password){
+    RegExp passwordRegExp = RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$');
+    return passwordRegExp.hasMatch(password);
   }
 }

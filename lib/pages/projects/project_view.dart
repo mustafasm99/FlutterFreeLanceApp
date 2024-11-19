@@ -1,5 +1,5 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
-import 'package:finailtask/pages/dashbord/project_status.dart';
+import 'package:finailtask/pages/dashbord/widgets/project_status.dart';
 import 'package:finailtask/pages/dashbord/project_tab_bar/project_tab_bar.dart';
 import 'package:finailtask/pages/projects/sections/freelancer_applied.dart';
 import 'package:finailtask/pages/projects/sections/task_tab_bars.dart';
@@ -29,108 +29,107 @@ class ProjectView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Template(
-      freeSpace: PageTitle(title: "$projectTitle"),
-      bottomNavigationBar: null,
-      child: Container(
-        margin: const EdgeInsets.only(top: 10),
-        padding: const EdgeInsets.all(10), // Main Container
-        child: Column(
-          // Main Column
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              // first Section { Project Status , timeline , Chart}
-              margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-              padding: const EdgeInsets.all(0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+        freeSpace: PageTitle(title: "$projectTitle"),
+        bottomNavigationBar: null,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.all(10), // Main Container
+            child: Column(
+              // Main Column
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  // first Section { Project Status , timeline , Chart}
+                  margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                  padding: const EdgeInsets.all(0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ProjectTextStatus(
-                        status: ProjectStatus.inProgress,
-                        label: "Status",
+                      Column(
+                        children: [
+                          ProjectTextStatus(
+                            status: ProjectStatus.inProgress,
+                            label: "Status",
+                          ),
+                          ProjectTextStatus(
+                            status: ProjectStatus.inProgress,
+                            label: "Timeline",
+                            title: "3 months",
+                            titleColor: context.fontColor,
+                          ),
+                        ],
                       ),
-                      ProjectTextStatus(
-                        status: ProjectStatus.inProgress,
-                        label: "Timeline",
-                        title: "3 months",
-                        titleColor: context.fontColor,
+                      Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        child: CircularPercentIndicator(
+                          radius: 30,
+                          lineWidth: 6,
+                          percent: progress / 100,
+                          center: Text(
+                            "$progress%",
+                            style: TextStyle(
+                              color: context.fontColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          progressColor: context.pendingColor,
+                        ),
                       ),
                     ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(right: 10),
-                    child: CircularPercentIndicator(
-                      radius: 30,
-                      lineWidth:6,
-                      percent: progress / 100,
-                      center: Text(
-                        "$progress%",
-                        style: TextStyle(
-                          color: context.fontColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(height: 20),
+                const PageLine(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Project Description :",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
-                      ),
-                      progressColor: context.pendingColor,
-                    ),
-                  ),
-                ],
-              ),
+                        AnimatedSize(
+                          duration: const Duration(milliseconds: 500),
+                          child: ReadMoreText(
+                            projectDescription,
+                            trimLines: 1,
+                            colorClickableText: context.primaryColor,
+                            trimMode: TrimMode.Line,
+                            trimCollapsedText: '...Read more',
+                            trimExpandedText: ' show less',
+                            style: TextStyle(
+                              color: context.fontColor,
+                              fontSize: 16,
+                            ),
+                            moreStyle: TextStyle(
+                              color: context.primaryDark,
+                              fontSize: 16,
+                            ),
+                            lessStyle: TextStyle(
+                              color: context.primaryDark,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ]),
+                ),
+                const PageLine(),
+                const SizedBox(height: 20),
+                (status == ProjectStatus.inProgress
+                    ? TaskTabBars()
+                    : FreelancerApplied()),
+              ],
             ),
-            const SizedBox(height: 20),
-            const PageLine(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Project Description :",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    AnimatedSize(
-                      duration: const Duration(milliseconds: 500),
-                      child: ReadMoreText(
-                        projectDescription,
-                        trimLines: 1,
-                        colorClickableText: context.primaryColor,
-                        trimMode: TrimMode.Line,
-                        trimCollapsedText: '...Read more',
-                        trimExpandedText: ' show less',
-                        style: TextStyle(
-                          color: context.fontColor,
-                          fontSize: 16,
-                        ),
-                        moreStyle: TextStyle(
-                          color: context.primaryDark,
-                          fontSize: 16,
-                        ),
-                        lessStyle: TextStyle(
-                          color: context.primaryDark,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ]),
-            ),
-            const PageLine(),
-            const SizedBox(height: 20),
-            (
-              status == ProjectStatus.inProgress ? 
-              const TaskTabBars() :
-              FreelancerApplied()
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

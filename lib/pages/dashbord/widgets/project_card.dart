@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finailtask/API/controllers/user_controller.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
-import 'package:finailtask/pages/dashbord/project_status.dart';
+import 'package:finailtask/pages/dashbord/widgets/project_status.dart';
 import 'package:finailtask/widgets/post/status.dart';
 import 'package:finailtask/widgets/text_or_shimmer.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:finailtask/API/controllers/user_controller.dart';
 import 'package:finailtask/extentions/sizeing.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
-import 'package:finailtask/pages/create_project/bottom_nav.dart';
+import 'package:finailtask/pages/create_project/widgets/bottom_nav.dart';
 import 'package:finailtask/pages/create_project/controller/create_project_slider_controller.dart';
 import 'package:finailtask/pages/create_project/sliders/slid1.dart';
 import 'package:finailtask/pages/create_project/sliders/slid2.dart';

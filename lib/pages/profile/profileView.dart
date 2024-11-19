@@ -1,8 +1,8 @@
 import 'package:finailtask/API/controllers/user_controller.dart';
 import 'package:finailtask/pages/profile/controllers/bio_controler.dart';
-import 'package:finailtask/pages/profile/profile_bio.dart';
-import 'package:finailtask/pages/profile/profile_image.dart';
-import 'package:finailtask/pages/profile/profile_project_history.dart';
+import 'package:finailtask/pages/profile/widgets/profile_bio.dart';
+import 'package:finailtask/pages/profile/widgets/profile_image.dart';
+import 'package:finailtask/pages/profile/widgets/profile_project_history.dart';
 import 'package:finailtask/widgets/page_title_widget.dart';
 import 'package:finailtask/widgets/template.dart';
 

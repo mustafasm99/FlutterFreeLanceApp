@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/slides/base_slid.dart';
 import 'package:finailtask/pages/inpording/ui_controller/form_controller.dart';
@@ -42,51 +44,80 @@ class Slid4 extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          NormalInput(
-            controller: controller.nameInput,
-            onChanged: (value) {
-              controller.name.value = value;
-              if (controller.is_valid()) {
-                SliderController.isSliderActive(true);
-                SliderController.update();
-              }
-            },
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            "Email",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+          Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                NormalInput(
+                  controller: controller.nameInput,
+                  onChanged: (value){
+                    if(controller.formKey.currentState!.validate()){
+                      SliderController.updateIsLastPage(true);
+                      SliderController.isSliderActive(true);
+                    }
+                  },
+                  vallation: (value) {
+                    if (value!.isEmpty) {
+                      return "Please enter your name";
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  "Email",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                NormalInput(
+                  controller: controller.emailInput,
+                  onChanged: (value){
+                    if(controller.formKey.currentState!.validate()){
+                      SliderController.updateIsLastPage(true);
+                      SliderController.isSliderActive(true);
+                    }
+                  },
+                  vallation: (value) {
+                    if (value!.isEmpty) {
+                      return "Please enter your email";
+                    }
+                    if (!GetUtils.isEmail(value)) {
+                      return "Please enter a valid email";
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  "Password",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                PasswordInputField(
+                  onChanged: (value){
+                    if(controller.formKey.currentState!.validate()){
+                      SliderController.updateIsLastPage(true);
+                      SliderController.isSliderActive(true);
+                    }
+                  },
+                  controller: controller.passwordInput,
+                  vallation: (value) {
+                    if (value!.isEmpty) {
+                      return "Please enter your password";
+                    }
+                    if (!controller.isValidPassword(value)) {
+                      return "Password must contain at least 8 characters, one uppercase letter, one number and one special character";
+                    }
+                    return null;
+                  },
+                ),
+              ],
             ),
-          ),
-          NormalInput(
-            controller: controller.emailInput,
-            onChanged: (value) {
-              controller.email.value = value;
-              if (controller.is_valid()) {
-                SliderController.isSliderActive(true);
-                SliderController.update();
-              }
-            },
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            "Password",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          PasswordInputField(
-            controller: controller.passwordInput,
-            onChanged: (value) {
-              controller.password.value = value;
-              if (controller.is_valid()) {
-                SliderController.isSliderActive(true);
-                SliderController.update();
-              }
-            },
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:finailtask/API/controllers/registration_controller.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/ui_controller/slide2_controller.dart';
 import 'package:finailtask/pages/inpording/ui_controller/slider_controller.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 class Slid2 extends StatelessWidget {
   var controller = Get.put(Slide2Controller());
   var SliderController = Get.put(sliderController());
+  RegistrationController registrationController = Get.find();
   Slid2({super.key});
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,8 @@ class Slid2 extends StatelessWidget {
                     controller.PhoneNumberController.text = value;
                     SliderController.isSliderActive(true);
                     SliderController.update();
+                    registrationController.phoneNumber(value);
+
                   }else{
                     SliderController.isSliderActive(false);
                     SliderController.update();

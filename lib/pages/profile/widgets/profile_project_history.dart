@@ -1,5 +1,5 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
-import 'package:finailtask/pages/profile/project_item.dart';
+import 'package:finailtask/pages/profile/widgets/project_item.dart';
 import 'package:finailtask/util/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,6 +1,8 @@
+import 'package:finailtask/API/controllers/registration_controller.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/slides/slid3.dart';
 import 'package:finailtask/pages/inpording/slides/slid4.dart';
+import 'package:finailtask/pages/inpording/ui_controller/form_controller.dart';
 import 'package:finailtask/pages/inpording/ui_controller/slider_controller.dart';
 import 'package:finailtask/util/button_text.dart';
 import 'package:finailtask/util/icons.dart';
@@ -17,9 +19,10 @@ class InpordingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CarouselSliderController InpordingsliderController =
+    CarouselSliderController registrationController =
         CarouselSliderController();
     var controller = Get.put(sliderController());
+    RegistrationController registerationController = Get.put(RegistrationController());
     return Scaffold(
       appBar: AppBar(),
       body: Obx(() {
@@ -81,23 +84,37 @@ class InpordingView extends StatelessWidget {
                     },
                     scrollPhysics: const NeverScrollableScrollPhysics(),
                   ),
-                  carouselController: InpordingsliderController,
+                  carouselController: registrationController,
                 ),
               ),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: FullScreenButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (controller.currentSlider.value < 3) {
+                        if(controller.currentSlider.value == 1){
+                          registerationController.sendPhoneNumber();
+                        }
+                        if(controller.currentSlider.value == 2){
+                          registerationController.verfiyPhonNumber();
+                        }
                         if (controller.isSliderActive.value) {
                           controller.currentSlider.value++;
                           controller.isSliderActive(false);
                         }
                       } else {
-                        Get.offAllNamed('/feed');
+                        var formController = Get.find<FromController>();
+                        if (formController.formKey.currentState!.validate()) {
+                          registerationController.name(formController.nameInput.text);
+                          registerationController.password(formController.passwordInput.text);
+                          registerationController.username(formController.emailInput.text);
+                          if(await registerationController.register())
+                          {Get.snackbar('Success', 'Login Success');
+                          Get.offAllNamed('/feed');}
+                        }
                       }
-                      InpordingsliderController.animateToPage(
+                      registrationController.animateToPage(
                           controller.currentSlider.value);
                     },
                     icon: controller.currentSlider.value == 0

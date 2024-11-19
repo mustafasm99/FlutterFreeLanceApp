@@ -6,14 +6,21 @@ import 'package:get/get.dart';
 
 class NormalInput extends StatelessWidget {
   final TextEditingController controller;
+  FormFieldValidator? vallation;
   void Function(String)? onChanged = (value) {};
-  NormalInput({super.key, required this.controller , this.onChanged});
+  NormalInput({super.key, required this.controller , this.onChanged , this.vallation});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: onChanged,
       controller: controller,
       decoration: InputDecoration(
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.red,
+          ),
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
@@ -27,6 +34,9 @@ class NormalInput extends StatelessWidget {
           ),
         ),
       ),
+      validator: vallation,
+      cursorErrorColor: Colors.red,
+      
     );
   }
 }
@@ -34,8 +44,9 @@ class NormalInput extends StatelessWidget {
 class PasswordInputField extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   void Function(String)? onChanged = (value) {};
+  FormFieldValidator? vallation;
 
-  PasswordInputField({super.key, required this.controller , this.onChanged});
+  PasswordInputField({super.key, required this.controller , this.onChanged , this.vallation});
   var widgetController = Get.put(PasswordController());
   @override
   Widget build(BuildContext context) {
@@ -43,6 +54,7 @@ class PasswordInputField extends StatelessWidget {
       () => TextFormField(
         onChanged: onChanged,
         controller: controller,
+        validator: vallation,
         obscureText: widgetController.show.value,
         decoration: InputDecoration(
           hintText: "Password",
@@ -55,7 +67,6 @@ class PasswordInputField extends StatelessWidget {
                     color: context.primaryColor,
                   ),
             onPressed: () {
-              print(widgetController.show.value);
               widgetController.show.value = !widgetController.show.value;
             },
           ),

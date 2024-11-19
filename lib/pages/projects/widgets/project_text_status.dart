@@ -1,6 +1,6 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
-import 'package:finailtask/pages/dashbord/project_status.dart';
-import 'package:finailtask/pages/dashbord/task_charts.dart';
+import 'package:finailtask/pages/dashbord/widgets/project_status.dart';
+import 'package:finailtask/pages/dashbord/widgets/task_charts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

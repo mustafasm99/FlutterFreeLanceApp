@@ -5,44 +5,41 @@ import 'package:get/get.dart';
 
 class FilterSelection extends StatelessWidget {
   final String text;
-  final CheckBoxController controller; // Pass the controller as a parameter
+  bool? value = false;
+  void Function(bool?)? onChanged;
 
   FilterSelection({
     super.key,
+    this.onChanged,
     required this.text,
-    required this.controller,
+    this.value,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Checkbox(
-                value: controller.state.value,
-                onChanged: (value) {
-                  controller.changeState();
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(2)),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+           Checkbox(
+              side: BorderSide(
+                color: context.fontColor,
+                width: 1,
               ),
-              const SizedBox(width: 20),
-              Text(
-                text,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: context.fontColor,
-                ),
-              ),
-            ],
+              value: value,
+              onChanged: onChanged,
+            ),
+          Text(
+            text,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+            ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

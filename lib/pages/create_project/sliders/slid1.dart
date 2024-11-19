@@ -1,6 +1,6 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/create_project/controller/create_project_slider_controller.dart';
-import 'package:finailtask/pages/create_project/select_cat.dart';
+import 'package:finailtask/pages/create_project/widgets/select_cat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';

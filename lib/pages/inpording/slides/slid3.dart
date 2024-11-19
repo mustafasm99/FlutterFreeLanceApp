@@ -1,3 +1,4 @@
+import 'package:finailtask/API/controllers/registration_controller.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/ui_controller/slide2_controller.dart';
 import 'package:finailtask/pages/inpording/ui_controller/slider_controller.dart';
@@ -7,14 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:timer_count_down/timer_controller.dart';
-
 class Slid3 extends StatelessWidget {
   Slid3({super.key});
-  Slide2Controller controller = Get.put(Slide2Controller());
-  sliderController SliderController = Get.find();
-  CountdownController countdownController = CountdownController();
+  final Slide2Controller controller = Get.put(Slide2Controller());
+  final sliderController SliderController = Get.find();
+  final CountdownController countdownController = CountdownController();
+  RegistrationController registrationController = Get.find();
   @override
   Widget build(BuildContext context) {
+    // Start the countdown when the widget is built for the first time
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!countdownController.isCompleted!) {
+        countdownController.start();
+      }
+    });
+
     return Center(
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 20),
@@ -47,6 +55,7 @@ class Slid3 extends StatelessWidget {
               onChanged: (value) {
                 if (value.length == 6) {
                   SliderController.isSliderActive(true);
+                  registrationController.oTp(value);
                 } else {
                   SliderController.isSliderActive(false);
                 }
@@ -59,20 +68,16 @@ class Slid3 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ProjectIcons.clock(color: context.primaryColor),
-                  const SizedBox(
-                    width: 5,
-                  ),
+                  const SizedBox(width: 5),
                   Countdown(
-                    controller: countdownController, // To Control the Countdown
+                    controller: countdownController,
                     seconds: 10,
                     onFinished: () {
                       countdownController.isCompleted = true;
                       countdownController.pause();
                       SliderController.counterFinished(true);
-
                     },
                     build: (BuildContext context, double time) {
-                      countdownController.start();
                       return Text(
                         "00:${time.toInt()}",
                         style: TextStyle(
@@ -104,6 +109,7 @@ class Slid3 extends StatelessWidget {
                     onPressed: () {
                       if (countdownController.isCompleted == true) {
                         countdownController.isCompleted = false;
+                        registrationController.sendPhoneNumber();
                         countdownController.restart();
                       }
                     },
@@ -122,7 +128,7 @@ class Slid3 extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

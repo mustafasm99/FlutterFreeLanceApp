@@ -2,6 +2,7 @@ import "package:finailtask/pages/create_project/create_project.dart";
 import "package:finailtask/pages/dashbord/dashboard_view.dart";
 import "package:finailtask/pages/home/home.dart";
 import "package:finailtask/pages/inpording/impording_page.dart";
+import "package:finailtask/pages/notifications/notifications_view.dart";
 import "package:finailtask/pages/profile/profileView.dart";
 import "package:finailtask/pages/projects/project_view.dart";
 import "package:finailtask/pages/settings/settings_view.dart";
@@ -19,6 +20,7 @@ class AppRouter {
   static const String settings = "/settings";
   static const String createProject = "/create-project";
   static const String project = "/project/:id,:title";
+  static const String notifications = "/notifications";
 }
 
 class AppPages {
@@ -29,6 +31,7 @@ class AppPages {
     GetPage(name: AppRouter.settings, page: () => const SettingsView()),
     GetPage(name: AppRouter.createProject, page: () => CreateProject()),
     GetPage(name: AppRouter.dashboard, page:()=> const DashboardView()),
-    GetPage(name: AppRouter.project, page:()=> ProjectView())
+    GetPage(name: AppRouter.project, page:()=> ProjectView()),
+    GetPage(name: AppRouter.notifications, page:()=> NotificationsView()),
   ];
 }

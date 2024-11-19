@@ -1,5 +1,6 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/util/icons.dart';
+import 'package:finailtask/widgets/full_screen_button.dart';
 import 'package:finailtask/widgets/post/filter_selection.dart';
 import 'package:finailtask/widgets/post/post_controller.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ import 'package:get/get.dart';
 class SearchSection extends StatelessWidget {
   SearchSection({super.key});
   PostController controller = Get.put(PostController());
-
+  var temp_list = [];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,26 +64,123 @@ class SearchSection extends StatelessWidget {
             ),
             child: IconButton(
                 onPressed: () {
-                  showBottomSheet(
+                  showModalBottomSheet(
+                    // button sheet page
                     context: context,
                     builder: (BuildContext context) {
                       return Container(
-                        height: 200,
-                        color: Colors.white,
+                        height: context.height * 0.35,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              spreadRadius: 1,
+                              blurRadius: 8,
+                              offset: Offset(0, 3),
+                            )
+                          ],
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 8),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            FilterSelection(
-                              text: 'Back End',
-                              controller: CheckBoxController(),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                color: context.fontColor,
+                              ),
                             ),
-                            FilterSelection(
-                              text: 'Front End',
-                              controller: CheckBoxController(),
+                            Obx(
+                              () => FilterSelection(
+                                text: 'Back End',
+                                value: controller.backendFilter.value,
+                                onChanged: (value) {
+                                  controller.backendFilter.value = value!;
+                                },
+                              ),
                             ),
-                            FilterSelection(
-                              text: 'Ui/Ux',
-                              controller: CheckBoxController(),
+                            Obx(
+                              () => FilterSelection(
+                                text: 'Front End',
+                                value: controller.frontendFilter.value,
+                                onChanged: (value) {
+                                  controller.frontendFilter.value = value!;
+                                },
+                              ),
                             ),
+                            Obx(
+                              () => FilterSelection(
+                                text: 'UI/UX',
+                                value: controller.uiUx.value,
+                                onChanged: (value) {
+                                  controller.uiUx.value = value!;
+                                },
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    controller.backendFilter.value = false;
+                                    controller.frontendFilter.value = false;
+                                    controller.uiUx.value = false;
+                                  },
+                                  child: Container(
+                                    width: context.width * 0.4,
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 20),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                        color: context.primaryDark,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Text(
+                                      'Cancel Sort',
+                                      style: TextStyle(
+                                        color: context.primaryDark,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    // apply filter and logic with backend
+                                  },
+                                  child: Container(
+                                    width: context.width * 0.4,
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 20),
+                                    decoration: BoxDecoration(
+                                      color: context.primaryDark,
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: const Text(
+                                      'Apply',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       );

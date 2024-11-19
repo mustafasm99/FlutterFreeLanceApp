@@ -3,6 +3,7 @@ import 'package:finailtask/API/controllers/user_controller.dart';
 import 'package:finailtask/extentions/sizeing.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/impording_page.dart';
+import 'package:finailtask/router.dart';
 import 'package:finailtask/util/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -102,7 +103,9 @@ class TopNavigationBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        IconButton(onPressed: () {}, icon: ProjectIcons.notification()),
+        IconButton(onPressed: () {
+          Get.toNamed(AppRouter.notifications);
+        }, icon: ProjectIcons.notification()),
       ],
     );
   }

@@ -1,4 +1,4 @@
-import 'package:finailtask/pages/dashbord/project_card.dart';
+import 'package:finailtask/pages/dashbord/widgets/project_card.dart';
 import 'package:flutter/material.dart';
 
 class ProjectsBarContentContainer extends StatelessWidget {

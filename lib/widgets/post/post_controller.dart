@@ -14,4 +14,8 @@ class CheckBoxController extends GetxController {
   void changeState() {
     state.value = !state.value;
   }
+
+  void resetState() {
+    state.value = false;
+  }
 }

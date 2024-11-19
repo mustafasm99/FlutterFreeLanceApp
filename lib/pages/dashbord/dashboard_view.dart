@@ -1,6 +1,6 @@
-import 'package:finailtask/pages/dashbord/card_slider.dart';
+import 'package:finailtask/pages/dashbord/widgets/card_slider.dart';
 import 'package:finailtask/pages/dashbord/project_tab_bar/project_tab_bar.dart';
-import 'package:finailtask/pages/dashbord/task_charts.dart';
+import 'package:finailtask/pages/dashbord/widgets/task_charts.dart';
 import 'package:finailtask/widgets/page_title_widget.dart';
 import 'package:finailtask/widgets/template.dart';
 import 'package:flutter/material.dart';
