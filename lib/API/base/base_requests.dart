@@ -1,14 +1,15 @@
 import 'package:dio/dio.dart';
 
 class BaseRequests {
-  String baseUrl = 'http://13.60.35.174/api/mobile/v1/';
-  Dio dio = Dio();
+  Dio dio = Dio(
+    BaseOptions(
+      baseUrl: "http://13.60.35.174/api/mobile/v1/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    ),
+  );
 
-  void init() {
-    dio.options.baseUrl = baseUrl;
-    dio.options.connectTimeout = const Duration(seconds: 5);
-    dio.options.receiveTimeout = const Duration(milliseconds: 3000);
-  }
 
   BaseRequests();
 

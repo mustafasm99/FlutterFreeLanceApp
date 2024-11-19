@@ -1,3 +1,4 @@
+import 'package:finailtask/API/base/base_response.dart';
 import 'package:finailtask/API/controllers/registration_controller.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/slides/slid3.dart';
@@ -22,7 +23,16 @@ class InpordingView extends StatelessWidget {
     CarouselSliderController registrationController =
         CarouselSliderController();
     var controller = Get.put(sliderController());
-    RegistrationController registerationController = Get.put(RegistrationController());
+    RegistrationController registerationController =
+        Get.put(RegistrationController());
+
+    void goToNextPage(bool state) {
+      if (state) {
+        controller.currentSlider.value++;
+        controller.isSliderActive(false);
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(),
       body: Obx(() {
@@ -45,16 +55,20 @@ class InpordingView extends StatelessWidget {
                     width: context.width * 0.28,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: controller.currentSlider.value >= 2 ? context.primaryColor : Colors.black45,
+                      color: controller.currentSlider.value >= 2
+                          ? context.primaryColor
+                          : Colors.black45,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
                       children: [
                         Container(
-                          width: (context.width * 0.28)/2,
+                          width: (context.width * 0.28) / 2,
                           height: 8,
                           decoration: BoxDecoration(
-                            color: controller.currentSlider.value >= 1 ? context.primaryColor : null,
+                            color: controller.currentSlider.value >= 1
+                                ? context.primaryColor
+                                : null,
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
@@ -92,30 +106,45 @@ class InpordingView extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: FullScreenButton(
                     onPressed: () async {
-                      if (controller.currentSlider.value < 3) {
-                        if(controller.currentSlider.value == 1){
-                          registerationController.sendPhoneNumber();
-                        }
-                        if(controller.currentSlider.value == 2){
-                          registerationController.verfiyPhonNumber();
-                        }
-                        if (controller.isSliderActive.value) {
-                          controller.currentSlider.value++;
-                          controller.isSliderActive(false);
-                        }
-                      } else {
-                        var formController = Get.find<FromController>();
-                        if (formController.formKey.currentState!.validate()) {
-                          registerationController.name(formController.nameInput.text);
-                          registerationController.password(formController.passwordInput.text);
-                          registerationController.username(formController.emailInput.text);
-                          if(await registerationController.register())
-                          {Get.snackbar('Success', 'Login Success');
-                          Get.offAllNamed('/feed');}
-                        }
+                      switch (controller.currentSlider.value) {
+                        case 0:
+                          goToNextPage(controller.isSliderActive.value);
+                          break;
+                        case 1:
+                          print(registerationController.phoneNumber.value);
+                          if (!await registerationController
+                              .sendPhoneNumber()) {
+                            Get.snackbar('Error', 'Phone Number is not valid');
+                            break;
+                          }
+                          goToNextPage(controller.isSliderActive.value);
+                          break;
+                        case 2:
+                          await registerationController.verfiyPhonNumber();
+                          goToNextPage(controller.isSliderActive.value);
+                          break;
+                        case 3:
+                          var formController = Get.find<FromController>();
+                          if (formController.formKey.currentState!.validate()) {
+                            registerationController
+                                .name(formController.nameInput.text);
+                            registerationController
+                                .password(formController.passwordInput.text);
+                            registerationController
+                                .username(formController.emailInput.text);
+                            BaseResponse registerResponse =
+                                await registerationController.register();
+                            if (registerResponse.status) {
+                              Get.snackbar('Success', 'Login Success');
+                              Get.offAllNamed('/feed');
+                            } else {
+                              Get.snackbar('Error', registerResponse.message);
+                            }
+                          }
+                          break;
                       }
-                      registrationController.animateToPage(
-                          controller.currentSlider.value);
+                      registrationController
+                          .animateToPage(controller.currentSlider.value);
                     },
                     icon: controller.currentSlider.value == 0
                         ? ProjectIcons.arrowRight(

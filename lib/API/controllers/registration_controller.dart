@@ -1,4 +1,7 @@
+import 'package:dio/dio.dart';
+import 'package:finailtask/API/base/base_error_response.dart';
 import 'package:finailtask/API/base/base_requests.dart';
+import 'package:finailtask/API/base/base_response.dart';
 import 'package:get/get.dart';
 
 class RegistrationController extends GetxController {
@@ -36,40 +39,70 @@ class RegistrationController extends GetxController {
     if (phoneNumber.value.isEmpty) {
       return false;
     }
-    var response = await BaseRequests().post('auth/sendVerificationCode',
-        data: {'phoneNumber': phoneNumber.value});
-    if (response.statusCode == 200) {
-      print(response.data);
-      return true;
+    try {
+      var response = await BaseRequests().post('auth/sendVerificationCode',
+          data: {'phoneNumber': phoneNumber.value});
+      if (response.statusCode == 200) {
+        print(response.data);
+        return true;
+      }
+    } catch (e) {
+      return false;
     }
     return false;
   }
 
   Future<bool> verfiyPhonNumber() async {
-    print("verfiyPhonNumber ==========>");
     if (phoneNumber.value.isEmpty || oTp.value.isEmpty) {
       return false;
     }
-    var response = await BaseRequests().post('auth/verifyPhoneNumber',
-        data: {'phone': phoneNumber.value, 'otp': oTp.value});
-    if (response.statusCode == 200) {
-      print(response.data);
-      return true;
+    try {
+      var response = await BaseRequests().post('auth/verifyPhoneNumber',
+          data: {'phone': phoneNumber.value, 'otp': oTp.value});
+      if (response.statusCode == 200) {
+        print(response.data);
+        return true;
+      }
+    } catch (e) {
+      return false;
     }
     return false;
   }
 
-  Future<bool> register() async {
-    var response =
-        await BaseRequests().post('auth/completeRegistration', data: getData);
+  Future<BaseResponse> register() async {
+    BaseResponse outputResponse = BaseResponse(status: false);
+    var dio = Dio(
+      BaseOptions(
+        baseUrl: 'http://13.60.35.174/api/mobile/v1/',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      ),
+    );
     try {
+      var response = await dio.post('auth/completeRegistration', data: getData);
+
       if (response.statusCode == 201) {
+        // Success
         print(response.data);
-        return true;
+        outputResponse.status = true;
+        outputResponse.response = response.data;
+      }
+    } on DioException catch (e) {
+      // Handle 400 status code specifically
+      if (e.response?.statusCode == 400) {
+        final errorMessages = e.response?.data['errors'] as List<dynamic>?;
+        if (errorMessages != null && errorMessages.isNotEmpty) {
+          final firstErrorMessage = errorMessages[0]['message'];
+          outputResponse.response = {"errorMessages": errorMessages};
+          outputResponse.message = firstErrorMessage;
+        }
       }
     } catch (error) {
-      print("====================================> Error");
+      // Handle other types of errors
+      outputResponse.response = {};
+      outputResponse.status = false;
     }
-    return false;
+    return outputResponse;
   }
 }
