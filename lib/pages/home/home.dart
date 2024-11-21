@@ -1,12 +1,47 @@
+import 'package:finailtask/API/controllers/registration_controller.dart';
+import 'package:finailtask/API/controllers/user_controller.dart';
+import 'package:finailtask/API/models/auth/user.dart';
 import 'package:finailtask/API/models/posts/post_user.dart';
+import 'package:finailtask/caching/sharedPrefs.dart';
+import 'package:finailtask/router.dart';
 import 'package:finailtask/widgets/post/post_widget.dart';
 import 'package:finailtask/widgets/post/search_section.dart';
 import 'package:finailtask/widgets/template.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+// import '/caching/sharedPrefs.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class HomeView extends StatefulWidget {
+  HomeView({super.key});
+
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  bool isInpordingFinished() {
+    return SharedPrefs().getString("inpording") == "Done";
+  }
+  RegistrationController registerationController = Get.find();
+  UserController userController = Get.find();
+  Users user = Users();
+  @override
+  void initState() {
+    super.initState();
+    if (isInpordingFinished() == false) {
+      Get.toNamed("/inpording");
+    }
+    else{
+      if(SharedPrefs().getMap("auth")!.isEmpty){
+      Get.toNamed(AppRouter.login);
+      }
+      Users user = Users.fromJson(SharedPrefs().getMap("auth")!);
+      userController.setUser(user);
+      this.user = userController.getUser();
+    }
+    print("user ==========>");
+    print(user.phone);
+  }
 
   @override
   Widget build(BuildContext context) {

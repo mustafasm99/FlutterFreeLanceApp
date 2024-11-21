@@ -13,13 +13,21 @@ class BaseRequests {
 
   BaseRequests();
 
+  void setHeaders(String token){
+    dio.options.headers['Authorization'] = 'Bearer $token';
+  }
+
   Future<Response> post(String url,
-      {required Map<String, dynamic> data}) async {
-    print("POST: data ==========>");
-    print(data);
+      {required Map<String, dynamic> data , String? token}) async {
     try {
+      print(token);
       final response = await dio.post(
-        url, data: data
+        url, data: data , options: Options(
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization":"Bearer $token"
+          },
+        ),
       );
       return response;
     } on DioException catch (e) {

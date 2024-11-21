@@ -2,6 +2,7 @@ import "package:finailtask/pages/create_project/create_project.dart";
 import "package:finailtask/pages/dashbord/dashboard_view.dart";
 import "package:finailtask/pages/home/home.dart";
 import "package:finailtask/pages/inpording/impording_page.dart";
+import "package:finailtask/pages/login/login_view.dart";
 import "package:finailtask/pages/notifications/notifications_view.dart";
 import "package:finailtask/pages/profile/profileView.dart";
 import "package:finailtask/pages/projects/project_view.dart";
@@ -25,7 +26,7 @@ class AppRouter {
 
 class AppPages {
   static final pages = [
-    GetPage(name: AppRouter.home, page: () => const HomeView() , transition: Transition.fadeIn),
+    GetPage(name: AppRouter.home, page: () => HomeView() , transition: Transition.fadeIn),
     GetPage(name: AppRouter.impording, page: () => const InpordingView() , transition: Transition.fadeIn),
     GetPage(name: AppRouter.profile, page: () => const ProfileView()),
     GetPage(name: AppRouter.settings, page: () => const SettingsView()),
@@ -33,5 +34,6 @@ class AppPages {
     GetPage(name: AppRouter.dashboard, page:()=> const DashboardView()),
     GetPage(name: AppRouter.project, page:()=> ProjectView()),
     GetPage(name: AppRouter.notifications, page:()=> NotificationsView()),
+    GetPage(name: AppRouter.login, page:()=> LoginView()),
   ];
 }

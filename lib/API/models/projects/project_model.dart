@@ -1,14 +1,14 @@
 class Projects {
-  final String title , description , qualificationName , priceType ;
-  final double duration , budget;
+  final String? title , description , qualificationName , priceType ;
+  final int? duration , budget;
 
   Projects({
-    required this.title,
-    required this.description,
-    required this.qualificationName,
-    required this.priceType,
-    required this.duration,
-    required this.budget,
+    this.title,
+    this.description,
+    this.qualificationName,
+    this.priceType,
+    this.duration,
+    this.budget,
   });
 
   factory Projects.fromJson(Map<String, dynamic> json) {

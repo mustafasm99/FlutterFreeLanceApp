@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:finailtask/API/controllers/projects_controller.dart';
 import 'package:finailtask/API/controllers/user_controller.dart';
 import 'package:finailtask/extentions/sizeing.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
@@ -20,6 +21,7 @@ class CreateProject extends StatelessWidget {
   CreateProjectSliderController controller =
       Get.put(CreateProjectSliderController());
   CarouselSliderController carouselController = CarouselSliderController();
+  CreateProjectFormController createProjectFromController = Get.put(CreateProjectFormController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +35,14 @@ class CreateProject extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 20),
             child: controller.currentIndex.value >= 1
                 ? FullScreenButton(
-                    onPressed: () {
-                      // Create the project with send it to backend
-                      Get.offNamed('/feed');
+                    onPressed:() async {
+                      if(await createProjectFromController.createProject()){
+                        Get.offNamed('/feed');
+                        Get.snackbar("Project", "Project created successfully");
+                      }
+                      else{
+                        Get.snackbar("Project", "Failed to create project");
+                      }
                     },
                     inputText: "Add Project",
                     icon: ProjectIcons.plusSign(

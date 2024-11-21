@@ -124,6 +124,20 @@ class Slid1 extends StatelessWidget {
               },
             ),
           ),
+          Obx(
+            () => UserTypeContainer(
+              icon: ProjectIcons.userSearch(
+                  color: _controller.selectedOption.value == "Client"
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.black),
+              title: "Have in Account",
+              description: "I’m a client or freelancer with an account",
+              isSelected: _controller.selectedOption.value == "Client",
+              onTap: (){
+                Get.toNamed("/login");
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:finailtask/themes/mainTheme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'caching/sharedPrefs.dart';
 
-
-void main() {
+void main() async {
   Get.put(UserController());
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefs().init();
   runApp(const MyApp());
 }
 

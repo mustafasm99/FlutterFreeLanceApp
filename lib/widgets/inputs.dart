@@ -8,10 +8,12 @@ class NormalInput extends StatelessWidget {
   final TextEditingController controller;
   FormFieldValidator? vallation;
   void Function(String)? onChanged = (value) {};
-  NormalInput({super.key, required this.controller , this.onChanged , this.vallation});
+  int? maxLength = 20;
+  NormalInput({ super.key,this.maxLength , required this.controller , this.onChanged , this.vallation});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: maxLength,
       onChanged: onChanged,
       controller: controller,
       decoration: InputDecoration(

@@ -1,15 +1,15 @@
+import 'package:finailtask/API/controllers/projects_controller.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/create_project/controller/create_project_slider_controller.dart';
 import 'package:finailtask/pages/create_project/widgets/select_cat.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 
 class CreateProjectSlid1 extends StatelessWidget {
   CreateProjectSlid1({super.key});
   CreateProjectSliderController  createProjectSliderController = Get.put(CreateProjectSliderController());
-
+  CreateProjectFormController createProjectFromController = Get.put(CreateProjectFormController());
   @override
   Widget build(BuildContext context) {
     // createProjectSliderController.setIndex(0);
@@ -32,6 +32,9 @@ class CreateProjectSlid1 extends StatelessWidget {
             ),
           ),
           TextFormField(
+            onChanged:(value){
+              createProjectFromController.title(value);
+            },
             // add controller with the API to send the data to the backend
             decoration: InputDecoration(
               hintText: "Enter Project Title",
@@ -69,6 +72,9 @@ class CreateProjectSlid1 extends StatelessWidget {
             height: 20,
           ),
           TextFormField(
+            onChanged:(value){
+              createProjectFromController.description(value);
+            },
             // add controller with the API to send the data to the backend
             maxLines: 10,
             decoration: InputDecoration(

@@ -12,6 +12,7 @@ class Users{
   final String? imageUrl;
   final String? userType;
   final String? workTitle;
+  final String? accessToken;
 
   Users({
     this.id,
@@ -27,22 +28,25 @@ class Users{
     this.imageUrl,
     this.userType,
     this.workTitle,
+    this.accessToken,
   });
 
   factory Users.fromJson(Map<String, dynamic> json){
+    print(json['results']['userDetailsDTO']);
     return Users(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      password: json['password'],
-      phone: json['phone'],
-      address: json['address'],
-      role: json['role'],
-      status: json['status'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-      imageUrl: json['imageUrl'],
-      userType: json['userType'],
+      id: json['results']?['userDetailsDTO']?['id'] != null ? json['results']['userDetailsDTO']['id'].toString() : '',
+      name: json['results']?['userDetailsDTO']?['name'] ?? '',
+      email: json['results']?['userDetailsDTO']?['username'] ?? '',
+      password: json['password'] ?? '',
+      phone: json['results']?['userDetailsDTO']?['phoneNumber'] ?? '',
+      address: json['address'] ?? '',
+      role: json['results']?['userDetailsDTO']?['role'] ?? '',
+      status: json['status'] ?? '',
+      createdAt: json['created_at'] ?? '',
+      updatedAt: json['updated_at'] ?? '',
+      imageUrl: json['imageUrl'] ?? '',
+      userType: json['results']?['userDetailsDTO']?['role'] ?? '',
+      accessToken: json['results']?['accessToken'] ?? '',
     );
   }
 
@@ -59,5 +63,6 @@ class Users{
     'updated_at': updatedAt,
     'imageUrl': imageUrl,
     'userType': userType,
+    'accessToken': accessToken,
   };
 }

@@ -1,5 +1,6 @@
 import 'package:finailtask/API/base/base_response.dart';
 import 'package:finailtask/API/controllers/registration_controller.dart';
+import 'package:finailtask/caching/sharedPrefs.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/inpording/slides/slid3.dart';
 import 'package:finailtask/pages/inpording/slides/slid4.dart';
@@ -111,7 +112,6 @@ class InpordingView extends StatelessWidget {
                           goToNextPage(controller.isSliderActive.value);
                           break;
                         case 1:
-                          print(registerationController.phoneNumber.value);
                           if (!await registerationController
                               .sendPhoneNumber()) {
                             Get.snackbar('Error', 'Phone Number is not valid');
@@ -134,8 +134,10 @@ class InpordingView extends StatelessWidget {
                                 .username(formController.emailInput.text);
                             BaseResponse registerResponse =
                                 await registerationController.register();
+                            
                             if (registerResponse.status) {
                               Get.snackbar('Success', 'Login Success');
+                              SharedPrefs().setString('inpording', "Done");
                               Get.offAllNamed('/feed');
                             } else {
                               Get.snackbar('Error', registerResponse.message);

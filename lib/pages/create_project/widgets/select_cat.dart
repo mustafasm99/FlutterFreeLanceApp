@@ -1,14 +1,15 @@
+import 'package:finailtask/API/controllers/projects_controller.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/create_project/controller/drop_list_controller.dart';
 import 'package:finailtask/util/icons.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class DropListSelectProjectType extends StatelessWidget {
   DropListSelectProjectType({super.key});
+
   var dropListController = DropListController();
+  CreateProjectFormController createProjectFromController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -38,6 +39,9 @@ class DropListSelectProjectType extends StatelessWidget {
               return DropdownMenuItem(
                 value: value,
                 child: Text(value),
+                onTap: (){
+                  createProjectFromController.qualificationName(value);
+                },
               );
             }).toList(),
             onChanged: (value) {

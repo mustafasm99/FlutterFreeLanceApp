@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 class DropListController  extends GetxController{
   RxList<String> dropList = [
     "Select option",
-    "UI/UX Designer",
-    "Frontend Developer",
-    "Backend Developer",
-    "Fullstack Developer",
-    "Mobile Developer",
+    "uiux",
+    "mobile",
+    "frontend",
+    "backend",
+    "fullstack",
   ].obs;
   var currentValue = "".obs;
   DropListController(){

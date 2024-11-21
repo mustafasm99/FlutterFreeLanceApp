@@ -1,11 +1,15 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:finailtask/API/controllers/projects_controller.dart';
 
 class CreateProjectSlider2 extends StatelessWidget {
   const CreateProjectSlider2({super.key});
 
   @override
   Widget build(BuildContext context) {
+    CreateProjectFormController controller = Get.find();
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,6 +28,13 @@ class CreateProjectSlider2 extends StatelessWidget {
           height: 5,
         ),
         TextFormField(
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly
+          ],
+          onChanged: (value){
+            controller.duration(int.tryParse(value) ?? 0);
+          },
           decoration: InputDecoration(
             hintText: "Enter Project Duration",
             hintStyle: TextStyle(
@@ -56,6 +67,13 @@ class CreateProjectSlider2 extends StatelessWidget {
           height: 5,
         ),
         TextFormField(
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly
+          ],
+          onChanged: (value){
+            controller.duration(int.tryParse(value) ?? 0);
+          },
           decoration: InputDecoration(
             hintText: "Enter Price of The Project",
             hintStyle: TextStyle(

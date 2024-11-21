@@ -3,6 +3,7 @@ import 'package:finailtask/API/base/base_error_response.dart';
 import 'package:finailtask/API/base/base_requests.dart';
 import 'package:finailtask/API/base/base_response.dart';
 import 'package:get/get.dart';
+import '/caching/sharedPrefs.dart';
 
 class RegistrationController extends GetxController {
   final name = ''.obs;
@@ -43,7 +44,6 @@ class RegistrationController extends GetxController {
       var response = await BaseRequests().post('auth/sendVerificationCode',
           data: {'phoneNumber': phoneNumber.value});
       if (response.statusCode == 200) {
-        print(response.data);
         return true;
       }
     } catch (e) {
@@ -81,12 +81,10 @@ class RegistrationController extends GetxController {
     );
     try {
       var response = await dio.post('auth/completeRegistration', data: getData);
-
       if (response.statusCode == 201) {
         // Success
-        print(response.data);
         outputResponse.status = true;
-        outputResponse.response = response.data;
+        
       }
     } on DioException catch (e) {
       // Handle 400 status code specifically
@@ -105,4 +103,22 @@ class RegistrationController extends GetxController {
     }
     return outputResponse;
   }
+
+  Future<bool> login() async {
+    try {
+      var response = await BaseRequests().post('auth/login',
+          data: {'phoneNumber': phoneNumber.value, 'password': password.value});
+      if (response.statusCode == 200) {
+        SharedPrefs().setMap('auth', response.data);
+        SharedPrefs().setString('token', response.data['results']?['accessToken']);
+        return true;
+      }else{
+        return false;
+      }
+    }
+    catch (e) {
+      return false;
+    }
+  }
+
 }
