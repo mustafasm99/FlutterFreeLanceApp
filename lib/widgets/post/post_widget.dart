@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finailtask/API/controllers/user_controller.dart';
 import 'package:finailtask/API/models/posts/post_user.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/main.dart';
@@ -16,13 +17,17 @@ class PostWidget extends StatelessWidget {
   final PostUser user;
   final String title;
   final String description;
-  const PostWidget({
+
+
+  PostWidget({
     super.key,
     this.imageUrl,
     required this.user,
     required this.title,
     required this.description,
   });
+
+  UserController userController = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -216,6 +221,8 @@ class PostWidget extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 2),
+            if(userController.getUser().userType == "FREELANCER")
             FullScreenButton(
               onPressed: () {},
               inputText: "Apply Now",
