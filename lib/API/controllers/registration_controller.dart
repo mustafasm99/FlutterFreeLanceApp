@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:finailtask/API/base/base_error_response.dart';
 import 'package:finailtask/API/base/base_requests.dart';
 import 'package:finailtask/API/base/base_response.dart';
+import 'package:finailtask/API/controllers/user_controller.dart';
+import 'package:finailtask/API/models/auth/user.dart';
 import 'package:get/get.dart';
 import '/caching/sharedPrefs.dart';
 
@@ -13,6 +15,8 @@ class RegistrationController extends GetxController {
   final userType = ''.obs;
   RxString? skills;
   RxString? companyName;
+
+  UserController userController = Get.find();
 
   final oTp = ''.obs;
 
@@ -111,6 +115,7 @@ class RegistrationController extends GetxController {
       if (response.statusCode == 200) {
         SharedPrefs().setMap('auth', response.data);
         SharedPrefs().setString('token', response.data['results']?['accessToken']);
+        userController.setUser(Users.fromJson(response.data));
         return true;
       }else{
         return false;

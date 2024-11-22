@@ -28,7 +28,7 @@ class AppPages {
   static final pages = [
     GetPage(name: AppRouter.home, page: () => HomeView() , transition: Transition.fadeIn),
     GetPage(name: AppRouter.impording, page: () => const InpordingView() , transition: Transition.fadeIn),
-    GetPage(name: AppRouter.profile, page: () => const ProfileView()),
+    GetPage(name: AppRouter.profile, page: () => ProfileView()),
     GetPage(name: AppRouter.settings, page: () => const SettingsView()),
     GetPage(name: AppRouter.createProject, page: () => CreateProject()),
     GetPage(name: AppRouter.dashboard, page:()=> const DashboardView()),

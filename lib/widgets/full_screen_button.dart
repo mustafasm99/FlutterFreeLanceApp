@@ -8,7 +8,7 @@ class FullScreenButton extends StatelessWidget {
   final String inputText;
   final Color color;
   final bool isActive;
-  
+  final double? height;
 
   const FullScreenButton({
     super.key,
@@ -17,6 +17,7 @@ class FullScreenButton extends StatelessWidget {
     required this.inputText,
     required this.color,
     this.isActive = false,
+    this.height,
   });
 
   @override
@@ -28,7 +29,7 @@ class FullScreenButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       backgroundColor: isActive ? color : context.unActive,
-      minimumSize: const Size.fromHeight(70),
+      minimumSize:Size.fromHeight(height ?? 70),
       ),
       onPressed: onPressed,
       child: Row(

@@ -1,3 +1,4 @@
+import 'package:finailtask/API/controllers/user_controller.dart';
 import 'package:finailtask/extentions/sizeing.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/navigation/ui_controller/nav_controller.dart';
@@ -8,6 +9,9 @@ import 'package:get/get.dart';
 class AppBottomNavigationBar extends StatelessWidget {
   AppBottomNavigationBar({super.key});
   var controller = Get.put(NavController());
+  UserController user = Get.find<UserController>();
+  
+  
 
   void _onItemTapped(int index) {
     controller.currentPage.value = index;
@@ -33,6 +37,8 @@ class AppBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isClient = user.getUser().userType == "CLIENT";
+    
     return Container(
       height: 75,
       padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -40,6 +46,7 @@ class AppBottomNavigationBar extends StatelessWidget {
       child: Obx(() {
         return Stack(
           children: [
+            if (isClient)
             CustomPaint(
               size: Size(context.screenWidth, 75),
               painter: BottomNavigationBarPinter(
@@ -48,8 +55,11 @@ class AppBottomNavigationBar extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+              color: isClient ? Colors.transparent : context.primaryColor,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: 
+                isClient ? MainAxisAlignment.spaceBetween :
+                MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(

@@ -22,6 +22,7 @@ class _HomeViewState extends State<HomeView> {
   bool isInpordingFinished() {
     return SharedPrefs().getString("inpording") == "Done";
   }
+
   RegistrationController registerationController = Get.find();
   UserController userController = Get.find();
   Users user = Users();
@@ -30,17 +31,14 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
     if (isInpordingFinished() == false) {
       Get.toNamed("/inpording");
-    }
-    else{
-      if(SharedPrefs().getMap("auth")!.isEmpty){
-      Get.toNamed(AppRouter.login);
+    } else {
+      if (SharedPrefs().getMap("auth")!.isEmpty) {
+        Get.toNamed(AppRouter.login);
+        Users user = Users.fromJson(SharedPrefs().getMap("auth")!);
+        userController.setUser(user);
+        this.user = userController.getUser();
       }
-      Users user = Users.fromJson(SharedPrefs().getMap("auth")!);
-      userController.setUser(user);
-      this.user = userController.getUser();
     }
-    print("user ==========>");
-    print(user.phone);
   }
 
   @override

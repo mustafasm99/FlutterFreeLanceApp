@@ -3,6 +3,7 @@ import 'package:finailtask/API/models/posts/post_user.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/main.dart';
 import 'package:finailtask/util/icons.dart';
+import 'package:finailtask/widgets/full_screen_button.dart';
 import 'package:finailtask/widgets/post/status.dart';
 import 'package:finailtask/widgets/post/post_controller.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class PostWidget extends StatelessWidget {
     PostController controller = Get.put<PostController>(PostController());
     return Container(
       width: context.width * 0.9,
-      height: controller.expanded.value ? double.maxFinite : 510,
+      height: controller.expanded.value ? double.maxFinite : 580,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
@@ -183,7 +184,8 @@ class PostWidget extends StatelessWidget {
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                   )
-                : const SizedBox(height: 2),
+                : const SizedBox(height: 1),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -213,6 +215,13 @@ class PostWidget extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            FullScreenButton(
+              onPressed: () {},
+              inputText: "Apply Now",
+              color: context.primaryDark,
+              isActive: true,
+              height: 45,
             ),
           ],
         ),

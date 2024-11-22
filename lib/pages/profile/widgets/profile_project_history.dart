@@ -1,10 +1,12 @@
+import 'package:finailtask/API/models/projects/project_model.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/pages/profile/widgets/project_item.dart';
 import 'package:finailtask/util/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class ProfileProjectHistory extends StatelessWidget {
-  const ProfileProjectHistory({super.key});
+  List<Projects>? projects = [];
+  ProfileProjectHistory({super.key , this.projects});
 
   @override
   Widget build(BuildContext context) {

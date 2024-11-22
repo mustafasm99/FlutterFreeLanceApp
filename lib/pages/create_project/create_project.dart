@@ -25,7 +25,7 @@ class CreateProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get.lazyPut(() => CreateProjectSliderController());
+    Get.lazyPut(() => CreateProjectSliderController());
     return Template(
       havFloatingButton: false,
       bottomNavigationBar: Obx(
@@ -36,13 +36,11 @@ class CreateProject extends StatelessWidget {
             child: controller.currentIndex.value >= 1
                 ? FullScreenButton(
                     onPressed:() async {
-                      if(await createProjectFromController.createProject()){
+                      await createProjectFromController.createProject();
                         Get.offNamed('/feed');
                         Get.snackbar("Project", "Project created successfully");
-                      }
-                      else{
-                        Get.snackbar("Project", "Failed to create project");
-                      }
+                      
+                      
                     },
                     inputText: "Add Project",
                     icon: ProjectIcons.plusSign(

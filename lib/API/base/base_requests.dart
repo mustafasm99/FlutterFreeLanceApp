@@ -33,11 +33,36 @@ class BaseRequests {
     } on DioException catch (e) {
       if (e.response != null) {
         // Server responded with an error
-        throw Exception("Server error: ${e.response?.data}");
+        throw Exception("Server error: ${e.response?.statusCode}");
       } else {
         // Request failed before reaching the server
         throw Exception("Request error: ${e.message}");
       }
     }
   }
+
+  Future<Response> get(String url, {String? token}) async {
+    print(url);
+    try {
+      final response = await dio.get(
+        url,
+        options: Options(
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization":"Bearer $token"
+          },
+        ),
+      );
+      return response;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        // Server responded with an error
+        throw Exception("Server error: ${e.response?.statusCode}");
+      } else {
+        // Request failed before reaching the server
+        throw Exception("Request error: ${e.message}");
+      }
+    }
+  }
+
 }

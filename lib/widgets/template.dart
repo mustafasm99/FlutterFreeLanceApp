@@ -1,3 +1,4 @@
+import 'package:finailtask/API/controllers/user_controller.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/navigation/bottom_nav.dart';
 import 'package:finailtask/navigation/top_nav.dart';
@@ -8,8 +9,11 @@ class Template extends StatelessWidget {
   final Widget child;
   final Widget? freeSpace;
   final Widget? bottomNavigationBar;
-  bool? havFloatingButton = true;
+  final bool havFloatingButton;
   
+  // to get the current logged in user
+  UserController user = Get.find<UserController>();
+
   Template(
     {
       super.key ,
@@ -19,15 +23,21 @@ class Template extends StatelessWidget {
       this.havFloatingButton = true,
     }
   );
+
+  
   @override
   Widget build(BuildContext context) {
+    
+    bool isClient = user.getUser().userType == "CLIENT";
+    
     return Scaffold(
       appBar:TopNavigationBar(
         freeSpace: freeSpace,
       ),
       body: child,
       bottomNavigationBar: bottomNavigationBar ?? AppBottomNavigationBar(),
-      floatingActionButton:(havFloatingButton ?? false) ? GestureDetector(
+      floatingActionButton:
+      (havFloatingButton && isClient) ? GestureDetector(
         onTap: () {
           Get.offNamed('/create-project');
         },
