@@ -119,5 +119,5 @@ class ProjectIcons {
       icon('trash.svg', color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
   static Widget messageEdit ({Color color = Colors.black, double size = 24.0}) =>
       icon('message-edit.svg', color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
-
+  static Widget multipleUsers ({Color color = Colors.black, double size = 24.0}) => icon("user-multiple.svg", color: ColorFilter.mode(color, BlendMode.srcIn), size: size);
 }
