@@ -1,7 +1,7 @@
 import 'package:finailtask/extentions/theme_extentions.dart';
 import 'package:finailtask/widgets/image_holder.dart';
 import 'package:flutter/material.dart';
-import '../../../util/icons.dart';
+
 
 class EducationsWidgets extends StatelessWidget {
   final String imageLink, title, description;

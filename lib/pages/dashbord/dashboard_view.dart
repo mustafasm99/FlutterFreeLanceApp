@@ -4,14 +4,21 @@ import 'package:finailtask/pages/dashbord/widgets/task_charts.dart';
 import 'package:finailtask/widgets/page_title_widget.dart';
 import 'package:finailtask/widgets/template.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../API/controllers/user_controller.dart';
 
 class DashboardView extends StatelessWidget {
-  const DashboardView({super.key});
+  DashboardView({super.key});
+  UserController user = Get.find(); // the current user
 
+ 
   @override
   Widget build(BuildContext context) {
+     var userType = user.getUser().userType;
     return Template(
-      freeSpace: PageTitle(title: "Dashboard"),
+      freeSpace: PageTitle(
+        title: userType ?? "Dashboard",
+        ),
       child: 
       Container(
         margin: const EdgeInsets.only(top: 10),

@@ -10,7 +10,7 @@ class ProjectsBarContentContainer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-          ProjectCard(title: "title", status: "In Progress", percentage: 20 , id: 1,)
+          ProjectCard(title: "title", status: "Pending", percentage: 20 , id: 1,)
       ],
     );
   }

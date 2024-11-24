@@ -23,6 +23,7 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userType = userController.getUser().userType;
     return Template(
       freeSpace: const PageTitle(title: "Profile"),
       child: Center(
@@ -46,6 +47,9 @@ class ProfileView extends StatelessWidget {
                   }
                 },
               ),
+              userType == "CLIENT"
+                  ? const SizedBox()
+                  :
               Column(
                 children: [
                   ///Education

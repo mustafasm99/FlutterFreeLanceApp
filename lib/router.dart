@@ -31,7 +31,7 @@ class AppPages {
     GetPage(name: AppRouter.profile, page: () => ProfileView()),
     GetPage(name: AppRouter.settings, page: () => const SettingsView()),
     GetPage(name: AppRouter.createProject, page: () => CreateProject()),
-    GetPage(name: AppRouter.dashboard, page:()=> const DashboardView()),
+    GetPage(name: AppRouter.dashboard, page:()=> DashboardView()),
     GetPage(name: AppRouter.project, page:()=> ProjectView()),
     GetPage(name: AppRouter.notifications, page:()=> NotificationsView()),
     GetPage(name: AppRouter.login, page:()=> LoginView()),
