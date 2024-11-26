@@ -134,7 +134,7 @@ class InpordingView extends StatelessWidget {
                                 .username(formController.emailInput.text);
                             BaseResponse registerResponse =
                                 await registerationController.register();
-                            
+                                await registerationController.login();
                             if (registerResponse.status) {
                               Get.snackbar('Success', 'Login Success');
                               SharedPrefs().setString('inpording', "Done");
