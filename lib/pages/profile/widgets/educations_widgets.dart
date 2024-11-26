@@ -22,43 +22,46 @@ class EducationsWidgets extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ImageHolder(link: imageLink),
-            const SizedBox(width: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: context.fontFamily,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ImageHolder(link: imageLink),
+              const SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: context.fontFamily,
+                    ),
                   ),
-                ),
-                Text(
-                    '${startDate.year} ${startDate.month} ${startDate.day} - ${endDate.year} ${endDate.month} ${endDate.day}',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: context.fontColor,
+                  Text(
+                      '${startDate.year} ${startDate.month} ${startDate.day} - ${endDate.year} ${endDate.month} ${endDate.day}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: context.fontColor,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  description,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: context.fontFamily,
+                  const SizedBox(
+                    height: 10,
                   ),
-                )
-              ],
-            )
-          ],
+                  Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: context.fontFamily,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         )
       ],
     );

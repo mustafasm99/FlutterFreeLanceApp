@@ -6,19 +6,19 @@ class SectionHolder extends StatelessWidget {
   final String title;
   void Function() onAdd;
   void Function() onEdit;
-  Widget child;
+  List<Widget> children;
 
   SectionHolder({
     super.key,
     required this.title,
     required this.onAdd,
     required this.onEdit,
-    required this.child,
+    required this.children,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  Container(
       width: double.maxFinite,
       padding: const EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
       margin: const EdgeInsets.symmetric(vertical: 10 , horizontal: 20),
@@ -26,33 +26,38 @@ class SectionHolder extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: context.hoverColor,
       ),
-      child: Column(
+      child:  Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    icon:const  Icon(Icons.add),
-                    onPressed: onAdd,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  IconButton(
-                    icon: ProjectIcons.edit(),
-                    onPressed: onEdit,
-                  ),
-                ],
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style:  TextStyle(fontWeight: FontWeight.bold, fontSize: 20,
+                  fontFamily: context.fontFamily),
+                ),
+                Row(
+
+                  children: [
+                    IconButton(
+                      icon:const  Icon(Icons.add),
+                      onPressed: onAdd,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    IconButton(
+                      icon: ProjectIcons.edit(),
+                      onPressed: onEdit,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          child,
+          ...children,
         ],
       ),
     );
