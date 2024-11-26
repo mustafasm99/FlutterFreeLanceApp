@@ -6,55 +6,55 @@ import '../../../widgets/image_holder.dart';
 
 class CourseCertificationWidget extends StatelessWidget {
   final String title;
-  final String certificationplace;
-  final String imagelink;
+  final String certificationPlace;
+  final String imageLink;
+  final String issuedDate;
 
-
-
-   CourseCertificationWidget({super.key,
-   required this.title,
-   required this.certificationplace,
-   required this.imagelink,
-   });
+  CourseCertificationWidget({
+    super.key,
+    required this.title,
+    required this.certificationPlace,
+    required this.imageLink,
+    required this.issuedDate,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ImageHolder(link:imagelink,),
-       const SizedBox(width: 20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title,
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                fontFamily: context.fontFamily)),
-            SizedBox(
-              height: 10,
-            ),
-            Text(certificationplace,
-                style: TextStyle(
-                    fontSize: 12,
-                    color: context.fontColor)),
-            Row(
-              children: [ Text('issued in',
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: context.fontColor)),
-                const SizedBox(width: 10,),
-
-
-              ],
-            ),
-            const SizedBox(height: 5,),
-            PageLine(),
-          ],
-        ),
-
-      ],
+    return Container(
+       padding: const EdgeInsets.symmetric(horizontal: 10),
+       margin: const EdgeInsets.symmetric(vertical: 10 , horizontal: 20),
+       child: Row(
+        children: [
+          ImageHolder(
+            link : imageLink,
+            width: 100,
+            height: 100,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style:  TextStyle(fontWeight: FontWeight.bold, fontSize: 20,
+                fontFamily: context.fontFamily),
+              ),
+              Text(
+                certificationPlace,
+                style:  TextStyle(fontWeight: FontWeight.bold, fontSize: 15,
+                fontFamily: context.fontFamily),
+              ),
+              Text(
+                "issued in $issuedDate",
+                style:  TextStyle(fontWeight: FontWeight.bold, fontSize: 15,
+                fontFamily: context.fontFamily),
+              ),
+            ],
+          ),
+        ],
+       ),
     );
   }
 }

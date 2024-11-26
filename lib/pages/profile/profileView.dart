@@ -96,9 +96,21 @@ class ProfileView extends StatelessWidget {
                         ),
 
                         ///Course & Certification///
-                      
-                      SectionHolder(title: 'Course %\nCrtification', onAdd: (){}, onEdit: (){}, children: [CourseCertificationWidget(title: 'Microsoft', certificationplace: 'Microsoft', imagelink: 'https://www.figma.com/file/74GOmTQnKKMAM0TdKbRfjp/image/11368974bb8bd11f43d134c06a23c0afb7385281')])
-                        
+
+                        SectionHolder(
+                          title: 'Course &\nCertifications',
+                          onAdd: () {},
+                          onEdit: () {},
+                          children: [
+                            CourseCertificationWidget(
+                              title: 'Microsoft 365 certified:',
+                              certificationPlace: 'Microsoft',
+                              imageLink:
+                                  'https://s3-alpha-sig.figma.com/img/87a3/f739/8a683f0d1dbfae16ae4b9fad5f9e2e20?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=jGioJTdgGeA7UmAio8R9MZj5d1xqQZE0HI48nPqsJDqK1FpQKcUJkf9quMhHEfaJ6B1G1RFIyoYYoP15zXOvWHeoqrOT7xpz9aR-5EWau7RbuKqIBPB9~uGZq~NIU4gtqDrmlhkpmv8D8K7PFvdBLzJ8mfZbrmLznGVMNAWEril~E0MiIW-hgcj5btcVpWCoNeqbNrP1p7aebWbxqkNlVdcAhTaQ6FnnQh1GOT4icPgnLwyEPSnGEdLBVpUrVSMlcW7nHX6k00a2F16L3mz-ZjtGLL6c3kWbFe71dVphj-qzbr7G~R0kIc5pDvcAYdlWTSVnDsxhnDaKhUan8opXFA__',
+                              issuedDate: '22 jul 01',
+                            ),
+                          ],
+                        ),
                       ],
                     ),
             ],
