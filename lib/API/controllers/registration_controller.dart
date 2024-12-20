@@ -30,23 +30,23 @@ class RegistrationController extends GetxController {
 
   Map<String, dynamic> get getData => {
         "name": name.value,
-        "username": username.value,
-        "phoneNumber": phoneNumber.value,
+        "email": username.value,
+        "phoneNumber": "+964${phoneNumber.value}",
         "password": password.value,
         "userType": userType.value,
-        "skills": skills?.value.isEmpty ?? true ? null : skills?.value,
         "companyName":
             companyName?.value.isEmpty ?? true ? null : companyName?.value,
       };
 
   Future<bool> sendPhoneNumber() async {
-    print("sendPhoneNumber ==========>");
     if (phoneNumber.value.isEmpty) {
       return false;
     }
     try {
-      var response = await BaseRequests().post('auth/sendVerificationCode',
-          data: {'phoneNumber': phoneNumber.value});
+    
+      var response = await BaseRequests().post('auth/send-verification-code',
+          data: {'phoneNumber': "+964${phoneNumber.value}"});
+      print(response);
       if (response.statusCode == 200) {
         return true;
       }
@@ -57,11 +57,12 @@ class RegistrationController extends GetxController {
   }
 
   Future<bool> verfiyPhonNumber() async {
+    
     if (phoneNumber.value.isEmpty || oTp.value.isEmpty) {
       return false;
     }
     try {
-      var response = await BaseRequests().post('auth/verifyPhoneNumber',
+      var response = await BaseRequests().post('auth/verify-phone-number',
           data: {'phone': phoneNumber.value, 'otp': oTp.value});
       if (response.statusCode == 200) {
         print(response.data);
@@ -77,14 +78,14 @@ class RegistrationController extends GetxController {
     BaseResponse outputResponse = BaseResponse(status: false);
     var dio = Dio(
       BaseOptions(
-        baseUrl: 'http://13.60.35.174/api/mobile/v1/',
+        baseUrl: 'http://16.170.247.41/api/mobile/v1/',
         headers: {
           'Content-Type': 'application/json',
         },
       ),
     );
     try {
-      var response = await dio.post('auth/completeRegistration', data: getData);
+      var response = await dio.post('auth/complete-registration', data: getData);
       if (response.statusCode == 201) {
         // Success
         outputResponse.status = true;
@@ -109,10 +110,13 @@ class RegistrationController extends GetxController {
   }
 
   Future<bool> login() async {
+    print("Login");
     try {
       var response = await BaseRequests().post('auth/login',
-          data: {'phoneNumber': phoneNumber.value, 'password': password.value});
+          data: {'email': username.value, 'password': password.value});
       if (response.statusCode == 200) {
+        print(response.data['results']?['accessToken']);
+        print("from Login");
         SharedPrefs().setMap('auth', response.data);
         SharedPrefs().setString('token', response.data['results']?['accessToken']);
         userController.setUser(Users.fromJson(response.data));

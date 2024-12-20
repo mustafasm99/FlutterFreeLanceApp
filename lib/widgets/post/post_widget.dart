@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finailtask/API/controllers/request_project_controller.dart';
 import 'package:finailtask/API/controllers/user_controller.dart';
 import 'package:finailtask/API/models/posts/post_user.dart';
 import 'package:finailtask/extentions/theme_extentions.dart';
-import 'package:finailtask/main.dart';
 import 'package:finailtask/util/icons.dart';
 import 'package:finailtask/widgets/full_screen_button.dart';
 import 'package:finailtask/widgets/post/status.dart';
@@ -28,13 +28,19 @@ class PostWidget extends StatelessWidget {
   });
 
   UserController userController = Get.find<UserController>();
+  RequestsProjectController requestsProjectForm = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
+    print(
+      "PostWidget: ${user.name} ${user.imageUrl} ${user.date} ${user.status}",
+    );
     PostController controller = Get.put<PostController>(PostController());
     return Container(
       width: context.width * 0.9,
-      height: controller.expanded.value ? double.maxFinite : 580,
+      height: controller.expanded.value ? double.maxFinite : null,
+      
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
@@ -82,7 +88,7 @@ class PostWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        user.name,
+                        user.name ?? '',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -90,7 +96,7 @@ class PostWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        user.date,
+                        user.date ?? '',
                         style: TextStyle(
                           fontSize: 12,
                           color: context.fontColor,
@@ -100,7 +106,7 @@ class PostWidget extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(width: 5),
-                  PostStatus(status: user.status),
+                  PostStatus(status: user.status ?? ''),
                   IconButton(
                     onPressed: () {},
                     icon: Icon(
@@ -141,7 +147,7 @@ class PostWidget extends StatelessWidget {
                           fontFamily: context.fontFamily,
                         ),
                       ),
-                      TextButton(
+                      description.length > 50 ? TextButton(
                         onPressed: () {
                           controller.expanded.value =
                               !controller.expanded.value;
@@ -153,7 +159,7 @@ class PostWidget extends StatelessWidget {
                             fontFamily: context.fontFamily,
                           ),
                         ),
-                      ),
+                      ):const SizedBox(),
                     ],
                   ),
                 );
@@ -187,7 +193,7 @@ class PostWidget extends StatelessWidget {
                       ),
                     ),
                     errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                        const SizedBox(),
                   )
                 : const SizedBox(height: 1),
             const SizedBox(height: 10),
@@ -222,9 +228,12 @@ class PostWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 2),
-            if(userController.getUser().userType == "FREELANCER")
+            if(userController.getUser().userType == "FREELANCER".toLowerCase())
             FullScreenButton(
-              onPressed: () {},
+              onPressed: () {
+                requestsProjectForm.selectedPost = user;
+                Get.toNamed("/requests-project");
+              },
               inputText: "Apply Now",
               color: context.primaryDark,
               isActive: true,

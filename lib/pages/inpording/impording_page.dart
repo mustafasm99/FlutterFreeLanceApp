@@ -145,8 +145,7 @@ class InpordingView extends StatelessWidget {
                           }
                           break;
                       }
-                      registrationController
-                          .animateToPage(controller.currentSlider.value);
+                      registrationController.animateToPage(controller.currentSlider.value);
                     },
                     icon: controller.currentSlider.value == 0
                         ? ProjectIcons.arrowRight(

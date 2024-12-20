@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class BaseRequests {
   Dio dio = Dio(
     BaseOptions(
-      baseUrl: "http://13.60.35.174/api/mobile/v1/",
+      baseUrl: "http://16.170.247.41/api/mobile/v1/",
       headers: {
         "Content-Type": "application/json",
       },
@@ -17,10 +17,10 @@ class BaseRequests {
     dio.options.headers['Authorization'] = 'Bearer $token';
   }
 
-  Future<Response> post(String url,
-      {required Map<String, dynamic> data , String? token}) async {
+  Future<Response> post(
+    String url,
+    {required Map<String, dynamic> data , String? token}) async {
     try {
-      print(token);
       final response = await dio.post(
         url, data: data , options: Options(
           headers: {
@@ -41,8 +41,7 @@ class BaseRequests {
     }
   }
 
-  Future<Response> get(String url, {String? token}) async {
-    print(url);
+  Future<Response> get(String url, {String? token ,}) async {
     try {
       final response = await dio.get(
         url,
@@ -53,6 +52,7 @@ class BaseRequests {
           },
         ),
       );
+      
       return response;
     } on DioException catch (e) {
       if (e.response != null) {

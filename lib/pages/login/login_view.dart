@@ -50,10 +50,10 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   NormalInput(
-                    maxLength: 11,
+                    
                     controller: phoneController,
                     onChanged: (value) {
-                      registerationController.phoneNumber(value);
+                      registerationController.username(value);
                       if(_formKey.currentState!.validate()){
                         isValid.value = true;
                       }

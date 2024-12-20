@@ -53,7 +53,6 @@ class Slid2 extends StatelessWidget {
                     SliderController.isSliderActive(true);
                     SliderController.update();
                     registrationController.phoneNumber(value);
-
                   }else{
                     SliderController.isSliderActive(false);
                     SliderController.update();

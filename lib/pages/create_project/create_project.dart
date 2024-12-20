@@ -38,9 +38,7 @@ class CreateProject extends StatelessWidget {
                     onPressed:() async {
                       await createProjectFromController.createProject();
                         Get.offNamed('/feed');
-                        Get.snackbar("Project", "Project created successfully");
-                      
-                      
+                        Get.snackbar("Project", "Project created successfully");                      
                     },
                     inputText: "Add Project",
                     icon: ProjectIcons.plusSign(

@@ -44,7 +44,7 @@ class Users{
       status: json['status'] ?? '',
       createdAt: json['created_at'] ?? '',
       updatedAt: json['updated_at'] ?? '',
-      imageUrl: json['imageUrl'] ?? '',
+      imageUrl: json['imageUrl'],
       userType: json['results']?['userDetailsDTO']?['role'] ?? '',
       accessToken: json['results']?['accessToken'] ?? '',
     );

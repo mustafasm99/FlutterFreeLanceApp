@@ -104,7 +104,7 @@ class Slid1 extends StatelessWidget {
               onTap: (){
                 _controller.selectedOption("Freelance");
                 _controller.isSliderActive(true);
-                registrationController.userType.value = "FREELANCER";
+                registrationController.userType.value = "freelancer";
               },
             ),
           ),
@@ -120,7 +120,7 @@ class Slid1 extends StatelessWidget {
               onTap: (){
                 _controller.selectedOption("Client");
                 _controller.isSliderActive(true);
-                registrationController.userType.value = "CLIENT";
+                registrationController.userType.value = "client";
               },
             ),
           ),
